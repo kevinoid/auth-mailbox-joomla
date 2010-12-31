@@ -15,9 +15,9 @@
  */
 
 // Check to ensure this file is included in Joomla!
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die('Restricted access');
 
-jimport( 'joomla.plugin.plugin' );
+jimport('joomla.plugin.plugin');
 
 /**
  * Mailbox Authentication Plugin
@@ -55,23 +55,21 @@ class plgAuthenticationMailbox extends JPlugin
 	 */
 	function _getMailboxString()
 	{
-		$mailboxParts = array( '{' );
-		$mailboxParts[] = $this->params->get( 'mail_server' );
+		$mailboxParts = array('{');
+		$mailboxParts[] = $this->params->get('mail_server');
 
-		$port = $this->params->get( 'mail_port' );
-		if (!empty( $port )) {
+		$port = $this->params->get('mail_port');
+		if (!empty($port)) {
 			$mailboxParts[] = ':';
 			$mailboxParts[] = $port;
 		}
 
-		$mailboxParts[] = '/service=' . $this->params->get( 'mail_protocol' );
+		$mailboxParts[] = '/service=' . $this->params->get('mail_protocol');
 		$mailboxParts[] = '/readonly';
 
-		switch ($this->params->get( 'mail_encryption' )) {
+		switch ($this->params->get('mail_encryption')) {
 			case 0:
 				$mailboxParts[] = '/notls';
-				break;
-			case 1:
 				break;
 			case 2:
 				$mailboxParts[] = '/tls';
@@ -79,13 +77,16 @@ class plgAuthenticationMailbox extends JPlugin
 			case 3:
 				$mailboxParts[] = '/ssl';
 				break;
+			default:
+				// For 1 (TLS Optional) and default case, no flag necessary
+				break;
 		}
 
-		if (empty( $this->params->get( 'mail_allow_plaintext' )) ) {
+		if (empty($this->params->get('mail_allow_plaintext'))) {
 			$mailboxParts[] = '/secure';
 		}
 
-		if (empty( $this->params->get( 'mail_validate_cert' )) ) {
+		if (empty($this->params->get('mail_validate_cert'))) {
 			$mailboxParts[] = '/novalidate-cert';
 		} else {
 			$mailboxParts[] = '/validate-cert';
@@ -93,7 +94,7 @@ class plgAuthenticationMailbox extends JPlugin
 
 		$mailboxParts[] = '}';
 
-		return imap_utf7_encode( implode( '', $mailboxParts ) );
+		return imap_utf7_encode(implode('', $mailboxParts));
 	}
 
 	/**
@@ -107,53 +108,60 @@ class plgAuthenticationMailbox extends JPlugin
 	 * @return	void
 	 * @since	1.5
 	 */
-	function onAuthenticate( $credentials, $options, &$response )
+	function onAuthenticate($credentials, $options, &$response)
 	{
-		if (!function_exists( 'imap_open' )) {
+		if (!function_exists('imap_open')) {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
-			$response->error_message = JText::_( 'ERRORIMAPNOTAVAIL' );
+			$response->error_message = JText::_('ERRORIMAPNOTAVAIL');
 			return;
 		}
 
 		// Empty username/password can be interpreted as anonymous auth.
 		if (empty($credentials['username']) || empty($credentials['password'])) {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
-			$response->error_message = JText::_( 'ERROREMPTYUSER' );
+			$response->error_message = JText::_('ERROREMPTYUSER');
 			return;
 		}
 
 		$mailboxStr = $this->_getMailboxString();
 		$username = $credentials['username'];
-		$domain = $this->params->get( 'mail_domain' );
-		if (!empty( $domain )) {
+		$domain = $this->params->get('mail_domain');
+		if (!empty($domain)) {
 			$email = $username . '@' . $domain;
-			if (!empty( $this->params->get( 'mail_domain_username' ))) {
+			if (!empty($this->params->get('mail_domain_username'))) {
 				$username = $email;
 			}
 		}
 
 		$mailboxOpts = OP_READONLY;
-		if (!empty( $this->params->get( 'mail_allow_plaintext' )) ) {
+		if (!empty($this->params->get('mail_allow_plaintext'))) {
 			$mailboxOpts |= OP_SECURE;
 		}
-		switch ($this->params->get( 'mail_protocol' )) {
+		switch ($this->params->get('mail_protocol')) {
 			case 'imap':
 			case 'nntp':
 				$mailboxOpts |= OP_HALFOPEN;
+				break;
+			default:
+				// OP_HALFOPEN only supported for IMAP and NNTP
 				break;
 		}
 
 		// Clear error stack
 		imap_errors();
 
-		$mailboxStream = imap_open( $mailboxStr,
-				$username, $credentials['password'],
-				$mailboxOpts, 1 );
+		$mailboxStream = imap_open(
+			$mailboxStr,
+			$username, $credentials['password'],
+			$mailboxOpts, 1
+		);
 
 		if (!$mailboxStream) {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
-			$response->error_message = JText::sprintf( 'ERRORCONNECT',
-				   implode( '\n', imap_errors() ) );
+			$response->error_message = JText::sprintf(
+				'ERRORCONNECT',
+				implode('\n', imap_errors())
+			);
 			return;
 		}
 
@@ -162,7 +170,7 @@ class plgAuthenticationMailbox extends JPlugin
 
 		$response->status = JAUTHENTICATE_STATUS_SUCCESS;
 		$response->error_message = '';
-		if (isset( $email )) {
+		if (isset($email)) {
 			$response->email = $email;
 		}
 	}
