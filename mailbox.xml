@@ -25,7 +25,7 @@
 		</param>
 		<param name="mail_server" type="text" default="localhost" label="PARAMSERVERLABEL" description="PARAMSERVERDESC" />
 		<param name="mail_port" type="text" default="143" label="PARAMPORTLABEL" description="PARAMPORTDESC" />
-		<param name="mail_protocol" type="radio" default="0" label="PARAMPROTOLABEL" description="PARAMPROTODESC">
+		<param name="mail_protocol" type="list" default="0" label="PARAMPROTOLABEL" description="PARAMPROTODESC">
 			<option value="imap">IMAP</option>
 			<option value="nntp">NNTP</option>
 			<option value="pop3">POP3</option>
@@ -37,7 +37,7 @@
 			<option value="1">PARAMVALYES</option>
 			<option value="0">PARAMVALNO</option>
 		</param>
-		<param name="mail_encryption" type="radio" default="1" label="PARAMENCRYPTLABEL" description="PARAMENCRYPTDESC">
+		<param name="mail_encryption" type="list" default="1" label="PARAMENCRYPTLABEL" description="PARAMENCRYPTDESC">
 			<option value="0">PARAMVALENCRYPTNONE</option>
 			<option value="1">PARAMVALENCRYPTTLSOPT</option>
 			<option value="2">PARAMVALENCRYPTTLSREQ</option>
