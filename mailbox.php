@@ -43,7 +43,7 @@ class plgAuthenticationMailbox extends JPlugin
 		parent::__construct($subject, $config);
 	}
 
-	function _getMailboxString( &$response )
+	function _getMailboxString()
 	{
 		$mailboxParts = array( '{' );
 		$mailboxParts[] = $this->params->get( 'mail_server' );
@@ -111,7 +111,7 @@ class plgAuthenticationMailbox extends JPlugin
 			return;
 		}
 
-		$mailboxStr = $this->_getMailboxString( $response );
+		$mailboxStr = $this->_getMailboxString();
 		$username = $credentials['username'];
 		$domain = $this->params->get( 'mail_domain' );
 		if (!empty( $domain )) {
