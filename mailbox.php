@@ -1,10 +1,11 @@
 <?php
 /**
+ * Source file for the Authentication - Mailbox Joomla! plugin
  *
  * @version		$Id$
  * @package		Joomla
  * @subpackage	JFramework
- * @copyright	Copyright (C) 2010 Digital Engine Software, LLC. All rights reserved.
+ * @copyright	Copyright (C) 2010 - 2011 Digital Engine Software, LLC. All rights reserved.
  * @license		GNU/GPL
  * Joomla! is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
@@ -31,11 +32,12 @@ class plgAuthenticationMailbox extends JPlugin
 	 * Constructor
 	 *
 	 * For php4 compatability we must not use the __constructor as a constructor for plugins
-	 * because func_get_args ( void ) returns a copy of all passed arguments NOT references.
+	 * because func_get_args (void) returns a copy of all passed arguments NOT references.
 	 * This causes problems with cross-referencing necessary for the observer design pattern.
 	 *
-	 * @param	object	$subject	The object to observe
+	 * @param	object	&$subject	The object to observe
 	 * @param	array	$config		An array that holds the plugin configuration
+	 *
 	 * @since	1.5
 	 */
 	function plgAuthenticationMailbox(& $subject, $config)
@@ -43,6 +45,14 @@ class plgAuthenticationMailbox extends JPlugin
 		parent::__construct($subject, $config);
 	}
 
+	/**
+	 * Get the mailbox connection string for use in imap_open determined from
+	 * the current param values.
+	 *
+	 * @return	string	Mailbox connection string for use in imap_open
+	 *
+	 * @access	private
+	 */
 	function _getMailboxString()
 	{
 		$mailboxParts = array( '{' );
@@ -89,11 +99,12 @@ class plgAuthenticationMailbox extends JPlugin
 	/**
 	 * Handle authentication and report back to the subject
 	 *
-	 * @access	public
 	 * @param	array	$credentials	Array holding the user credentials
 	 * @param	array	$options		Array of extra options
-	 * @param	object	$response		Authentication response object
-	 * @return	boolean
+	 * @param	object	&$response		Authentication response object
+	 *
+	 * @access	public
+	 * @return	void
 	 * @since	1.5
 	 */
 	function onAuthenticate( $credentials, $options, &$response )
