@@ -59,7 +59,7 @@ class plgAuthenticationMailbox extends JPlugin
 		$mailboxParts[] = $this->params->get('mail_server');
 
 		$port = $this->params->get('mail_port');
-		if (!empty($port)) {
+		if ($port) {
 			$mailboxParts[] = ':';
 			$mailboxParts[] = $port;
 		}
@@ -82,14 +82,14 @@ class plgAuthenticationMailbox extends JPlugin
 				break;
 		}
 
-		if (empty($this->params->get('mail_allow_plaintext'))) {
+		if (!$this->params->get('mail_allow_plaintext')) {
 			$mailboxParts[] = '/secure';
 		}
 
-		if (empty($this->params->get('mail_validate_cert'))) {
-			$mailboxParts[] = '/novalidate-cert';
-		} else {
+		if ($this->params->get('mail_validate_cert')) {
 			$mailboxParts[] = '/validate-cert';
+		} else {
+			$mailboxParts[] = '/novalidate-cert';
 		}
 
 		$mailboxParts[] = '}';
@@ -126,15 +126,15 @@ class plgAuthenticationMailbox extends JPlugin
 		$mailboxStr = $this->_getMailboxString();
 		$username = $credentials['username'];
 		$domain = $this->params->get('mail_domain');
-		if (!empty($domain)) {
+		if ($domain) {
 			$email = $username . '@' . $domain;
-			if (!empty($this->params->get('mail_domain_username'))) {
+			if ($this->params->get('mail_domain_username')) {
 				$username = $email;
 			}
 		}
 
 		$mailboxOpts = OP_READONLY;
-		if (!empty($this->params->get('mail_allow_plaintext'))) {
+		if (!$this->params->get('mail_allow_plaintext')) {
 			$mailboxOpts |= OP_SECURE;
 		}
 		switch ($this->params->get('mail_protocol')) {
