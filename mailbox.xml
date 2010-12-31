@@ -20,8 +20,8 @@
 	<params>
 		<param name="mail_domain" type="text" default="example.com" label="PARAMDOMAINLABEL" description="PARAMDOMAINDESC" />
 		<param name="mail_domain_username" type="radio" default="0" label="PARAMDOMAINUSERLABEL" description="PARAMDOMAINUSERDESC">
-			<option value="0">PARAMVALNO</option>
 			<option value="1">PARAMVALYES</option>
+			<option value="0">PARAMVALNO</option>
 		</param>
 		<param name="mail_server" type="text" default="localhost" label="PARAMSERVERLABEL" description="PARAMSERVERDESC" />
 		<param name="mail_port" type="text" default="143" label="PARAMPORTLABEL" description="PARAMPORTDESC" />
@@ -34,8 +34,8 @@
 		<param name="@spacer" type="spacer" default="" label="" description="" />
 
 		<param name="mail_allow_plaintext" type="radio" default="0" label="PARAMALLOWPLAINLABEL" description="PARAMALLOWPLAINDESC">
-			<option value="0">PARAMVALNO</option>
 			<option value="1">PARAMVALYES</option>
+			<option value="0">PARAMVALNO</option>
 		</param>
 		<param name="mail_encryption" type="radio" default="1" label="PARAMENCRYPTLABEL" description="PARAMENCRYPTDESC">
 			<option value="0">PARAMVALENCRYPTNONE</option>
@@ -44,8 +44,8 @@
 			<option value="3">PARAMVALENCRYPTSSL</option>
 		</param>
 		<param name="mail_validate_cert" type="radio" default="1" label="PARAMVALIDCERTLABEL" description="PARAMVALIDCERTDESC">
-			<option value="0">PARAMVALNO</option>
 			<option value="1">PARAMVALYES</option>
+			<option value="0">PARAMVALNO</option>
 		</param>
 	</params>
 </install>
