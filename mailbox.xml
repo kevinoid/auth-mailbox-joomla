@@ -8,7 +8,7 @@
 	<copyright>Copyright (C) 2010 Digital Engine Software, LLC. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>klocke@digitalenginesoftware.com</authorEmail>
-	<authorUrl>github.com/kevinoid/joomla-auth-mailbox</authorUrl>
+	<authorUrl>github.com/kevinoid/auth-mailbox-joomla</authorUrl>
 	<version>1.0.0</version>
 	<description>PLUGINDESC</description>
 	<files>

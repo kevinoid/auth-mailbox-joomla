@@ -1,6 +1,6 @@
 <?php
 /**
- * Source file for the Authentication - Mailbox Joomla! plugin
+ * Source file for the Authentication - Mailbox plugin
  *
  * @version		$Id$
  * @package		Auth_Mailbox
