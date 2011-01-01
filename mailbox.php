@@ -42,6 +42,7 @@ class plgAuthenticationMailbox extends JPlugin
 	function plgAuthenticationMailbox(& $subject, $config)
 	{
 		parent::__construct($subject, $config);
+		$this->loadLanguage('', JPATH_ADMINISTRATOR);
 	}
 
 	/**
