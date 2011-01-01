@@ -3,10 +3,10 @@
  * Source file for the Authentication - Mailbox Joomla! plugin
  *
  * @version		$Id$
- * @package		Joomla
- * @subpackage	JFramework
+ * @package		Auth_Mailbox
  * @copyright	Copyright (C) 2010 - 2011 Digital Engine Software, LLC. All rights reserved.
- * @license		GNU/GPL
+ * @license		GNU/GPL <http://www.gnu.org/licenses/gpl-2.0.html>
+ * @since		1.0.0
  * Joomla! is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
  * is derivative of works licensed under the GNU General Public License or
@@ -22,9 +22,8 @@ jimport('joomla.plugin.plugin');
 /**
  * Mailbox Authentication Plugin
  *
- * @package		Joomla
- * @subpackage	JFramework
- * @since 1.5
+ * @package	Auth_Mailbox
+ * @since	1.0.0
  */
 class plgAuthenticationMailbox extends JPlugin
 {
