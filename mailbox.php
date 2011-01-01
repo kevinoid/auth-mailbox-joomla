@@ -149,7 +149,7 @@ class plgAuthenticationMailbox extends JPlugin
 		// Clear error stack
 		imap_errors();
 
-		$mailboxStream = imap_open(
+		$mailboxStream = @imap_open(
 			$mailboxStr,
 			$username, $credentials['password'],
 			$mailboxOpts, 1
@@ -157,10 +157,17 @@ class plgAuthenticationMailbox extends JPlugin
 
 		if (!$mailboxStream) {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
-			$response->error_message = JText::sprintf(
-				'ERRORCONNECT',
-				implode('\n', imap_errors())
-			);
+
+			$imapErrors = imap_errors();
+			if (is_array($imapErrors)) {
+				$response->error_message = JText::sprintf(
+					'ERRORCONNECTWITHMSG',
+					implode('\n', $imapErrors)
+				);
+			} else {
+				$response->error_message = JText::_('ERRORCONNECT');
+			}
+
 			return;
 		}
 
