@@ -113,6 +113,8 @@ class plgAuthenticationMailbox extends JPlugin
 		if (!function_exists('imap_open')) {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
 			$response->error_message = JText::_('ERRORIMAPNOTAVAIL');
+			// Important, not shown from error_message in all cases
+			JError::raiseWarning(500, $response->error_message);
 			return;
 		}
 
@@ -166,6 +168,8 @@ class plgAuthenticationMailbox extends JPlugin
 					'ERRORCONNECTWITHMSG',
 					implode('<br />', $imapErrors)
 				);
+				// Important, not shown from error_message in all cases
+				JError::raiseWarning(500, $response->error_message);
 			} else {
 				$response->error_message = JText::_('ERRORCONNECT');
 			}

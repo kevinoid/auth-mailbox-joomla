@@ -2,6 +2,7 @@
 
     * mailbox.xml: Add parameter to show IMAP errors
     * mailbox.php: Show IMAP errors on failure when configured to do so
+    * mailbox.php: Raise warnings for errors during authentication
 
 2011-01-01  Kevin Locke <klocke@digitalenginesoftware.com>
 
