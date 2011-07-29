@@ -47,6 +47,10 @@
 			<option value="1">PARAMVALYES</option>
 			<option value="0">PARAMVALNO</option>
 		</param>
+		<param name="show_imap_errors" type="radio" default="0" label="PARAMIMAPERRLABEL" description="PARAMIMAPERRDESC">
+			<option value="1">PARAMVALYES</option>
+			<option value="0">PARAMVALNO</option>
+		</param>
 	</params>
 </install>
 <!-- vi: set fileencoding=utf-8 nobomb sts=4 sw=4 ts=4 noet : -->

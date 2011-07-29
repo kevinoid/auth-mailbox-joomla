@@ -160,10 +160,11 @@ class plgAuthenticationMailbox extends JPlugin
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
 
 			$imapErrors = imap_errors();
-			if (is_array($imapErrors)) {
+			if (is_array($imapErrors) &&
+					$this->params->get('show_imap_errors')) {
 				$response->error_message = JText::sprintf(
 					'ERRORCONNECTWITHMSG',
-					implode('\n', $imapErrors)
+					implode('<br />', $imapErrors)
 				);
 			} else {
 				$response->error_message = JText::_('ERRORCONNECT');

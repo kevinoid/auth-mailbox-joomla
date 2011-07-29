@@ -1,3 +1,8 @@
+2011-07-28  Kevin Locke <klocke@digitalenginesoftware.com>
+
+    * mailbox.xml: Add parameter to show IMAP errors
+    * mailbox.php: Show IMAP errors on failure when configured to do so
+
 2011-01-01  Kevin Locke <klocke@digitalenginesoftware.com>
 
     * *.*: Initial Release (1.0.0)
