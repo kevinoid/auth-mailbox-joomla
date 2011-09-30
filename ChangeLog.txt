@@ -2,6 +2,7 @@
 
     * mailbox.php: Change onAuthenticate to onUserAuthenticate for Joomla! 1.6
     * mailbox.xml: Update layout for Joomla! 1.6
+    * mailbox.xml: Change default port and update documentation
     * *.ini: Change comments in language file from '#' to ';'
     * *.ini: Quote all values
 
