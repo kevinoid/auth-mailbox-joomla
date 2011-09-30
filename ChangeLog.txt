@@ -1,5 +1,6 @@
 2011-09-29  Kevin Locke <klocke@digitalenginesoftware.com>
 
+    * *.*: Release 1.0.2
     * mailbox.xml: Change default port and update documentation
 
 2011-07-28  Kevin Locke <klocke@digitalenginesoftware.com>
