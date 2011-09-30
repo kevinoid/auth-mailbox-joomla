@@ -1,5 +1,6 @@
 2011-09-29  Kevin Locke <klocke@digitalenginesoftware.com>
 
+    * mailbox.xml: Update layout for Joomla! 1.6
     * *.ini: Change comments in language file from '#' to ';'
     * *.ini: Quote all values
 
