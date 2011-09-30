@@ -106,10 +106,12 @@ class plgAuthenticationMailbox extends JPlugin
 	 *
 	 * @access	public
 	 * @return	void
-	 * @since	1.5
+	 * @since	1.6
 	 */
-	function onAuthenticate($credentials, $options, &$response)
+	function onUserAuthenticate($credentials, $options, &$response)
 	{
+		$response->type = 'Mailbox';
+
 		if (!function_exists('imap_open')) {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
 			$response->error_message = JText::_('ERRORIMAPNOTAVAIL');
