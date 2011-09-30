@@ -24,7 +24,7 @@
 			<option value="0">PARAMVALNO</option>
 		</param>
 		<param name="mail_server" type="text" default="localhost" label="PARAMSERVERLABEL" description="PARAMSERVERDESC" />
-		<param name="mail_port" type="text" default="143" label="PARAMPORTLABEL" description="PARAMPORTDESC" />
+		<param name="mail_port" type="text" default="" label="PARAMPORTLABEL" description="PARAMPORTDESC" />
 		<param name="mail_protocol" type="list" default="0" label="PARAMPROTOLABEL" description="PARAMPROTODESC">
 			<option value="imap">IMAP</option>
 			<option value="nntp">NNTP</option>

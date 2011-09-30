@@ -1,3 +1,7 @@
+2011-09-29  Kevin Locke <klocke@digitalenginesoftware.com>
+
+    * mailbox.xml: Change default port and update documentation
+
 2011-07-28  Kevin Locke <klocke@digitalenginesoftware.com>
 
     * mailbox.xml: Add parameter to show IMAP errors
