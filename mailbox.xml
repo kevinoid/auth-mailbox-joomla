@@ -30,6 +30,10 @@
 					<option value="nntp">NNTP</option>
 					<option value="pop3">POP3</option>
 				</field>
+				<field name="create_users" type="radio" default="1" label="PARAMCREATEUSERSLABEL" description="PARAMCREATEUSERSDESC">
+					<option value="1">PARAMVALYES</option>
+					<option value="0">PARAMVALNO</option>
+				</field>
 			</fieldset>
 
 			<fieldset name="advanced">

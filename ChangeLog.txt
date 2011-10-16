@@ -1,3 +1,7 @@
+2011-10-16  Kevin Locke <klocke@digitalenginesoftware.com>
+
+    * *.*: Add "Create User" option to control Joomla! user account creation
+
 2011-09-29  Kevin Locke <klocke@digitalenginesoftware.com>
 
     * *.*: Release 1.0.2
