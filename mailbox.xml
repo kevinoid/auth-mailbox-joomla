@@ -24,7 +24,6 @@
 					<option value="0">PARAMVALNO</option>
 				</field>
 				<field name="mail_server" type="text" default="localhost" label="PARAMSERVERLABEL" description="PARAMSERVERDESC" />
-				<field name="mail_port" type="text" default="" label="PARAMPORTLABEL" description="PARAMPORTDESC" />
 				<field name="mail_protocol" type="list" default="0" label="PARAMPROTOLABEL" description="PARAMPROTODESC">
 					<option value="imap">IMAP</option>
 					<option value="nntp">NNTP</option>
@@ -37,6 +36,7 @@
 			</fieldset>
 
 			<fieldset name="advanced">
+				<field name="mail_port" type="text" default="" label="PARAMPORTLABEL" description="PARAMPORTDESC" />
 				<field name="mail_allow_plaintext" type="radio" default="0" label="PARAMALLOWPLAINLABEL" description="PARAMALLOWPLAINDESC">
 					<option value="1">PARAMVALYES</option>
 					<option value="0">PARAMVALNO</option>
