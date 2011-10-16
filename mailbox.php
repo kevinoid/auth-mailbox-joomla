@@ -125,6 +125,17 @@ class plgAuthenticationMailbox extends JPlugin
 			return;
 		}
 
+		// Check that the user exists, if required
+		if (!$this->params->get('create_users')) {
+			jimport('joomla.user.helper');
+
+			if (!JUserHelper::getUserId($credentials['username'])) {
+				$response->status = JAUTHENTICATE_STATUS_FAILURE;
+				$response->error_message = JText::_('JGLOBAL_AUTH_NO_USER');
+				return;
+			}
+		}
+
 		$mailboxStr = $this->_getMailboxString();
 		$username = $credentials['username'];
 		$domain = $this->params->get('mail_domain');
