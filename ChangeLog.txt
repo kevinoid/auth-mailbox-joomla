@@ -1,5 +1,6 @@
 2011-10-16  Kevin Locke <klocke@digitalenginesoftware.com>
 
+    * *.*: Release 1.0.3
     * mailbox.xml: Move "Server Port" option from basic to advanced section
     * *.*: Add "Create User" option to control Joomla! user account creation
 
