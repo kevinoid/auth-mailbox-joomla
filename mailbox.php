@@ -64,8 +64,13 @@ class plgAuthenticationMailbox extends JPlugin
 			$mailboxParts[] = $port;
 		}
 
-		$mailboxParts[] = '/service=' . $this->params->get('mail_protocol');
-		$mailboxParts[] = '/readonly';
+		$protocol = $this->params->get('mail_protocol');
+		$mailboxParts[] = '/service=' . $protocol;
+
+		// Note:  /readonly only supported for IMAP, errors with SMTP & POP3
+		if ($protocol === 'imap') {
+			$mailboxParts[] = '/readonly';
+		}
 
 		switch ($this->params->get('mail_encryption')) {
 			case 0:
@@ -146,17 +151,26 @@ class plgAuthenticationMailbox extends JPlugin
 			}
 		}
 
-		$mailboxOpts = OP_READONLY;
+		// Build mailbox options for imap_open
+		$mailboxOpts = 0;
+		$protocol = $this->params->get('mail_protocol');
+
+		// Note:  OP_READONLY only supported for IMAP, errors with SMTP & POP3
+		if ($protocol === 'imap') {
+			$mailboxOpts |= OP_READONLY;
+		}
+
 		if (!$this->params->get('mail_allow_plaintext')) {
 			$mailboxOpts |= OP_SECURE;
 		}
-		switch ($this->params->get('mail_protocol')) {
+
+		// Note:  OP_HALFOPEN only supported for IMAP and NNTP
+		switch ($protocol) {
 			case 'imap':
 			case 'nntp':
 				$mailboxOpts |= OP_HALFOPEN;
 				break;
 			default:
-				// OP_HALFOPEN only supported for IMAP and NNTP
 				break;
 		}
 
