@@ -1,3 +1,8 @@
+2012-03-30  Kevin Locke <klocke@digitalenginesoftware.com>
+
+    * *.*: Release 1.0.5
+    * *.*: Compatibility updates for Joomla! 2.5
+
 2011-11-27  Kevin Locke <klocke@digitalenginesoftware.com>
 
     * *.*: Release 1.0.4
