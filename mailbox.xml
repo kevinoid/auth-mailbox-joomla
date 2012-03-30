@@ -8,7 +8,7 @@
 	<authorEmail>klocke@digitalenginesoftware.com</authorEmail>
 	<authorUrl>github.com/kevinoid/auth-mailbox-joomla</authorUrl>
 	<version>1.0.4</version>
-	<description>PLUGINDESC</description>
+	<description>PLG_AUTH_MAILBOX_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="mailbox">mailbox.php</filename>
 	</files>
