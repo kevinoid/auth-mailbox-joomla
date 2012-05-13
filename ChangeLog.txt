@@ -1,3 +1,7 @@
+2012-04-13  Kevin Locke <klocke@digitalenginesoftware.com>
+
+    * *.*: Release 1.0.6  (No changes.  1.0.5 not released for Joomla! 1.5.)
+
 2011-11-27  Kevin Locke <klocke@digitalenginesoftware.com>
 
     * *.*: Release 1.0.4

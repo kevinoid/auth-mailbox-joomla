@@ -9,7 +9,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>klocke@digitalenginesoftware.com</authorEmail>
 	<authorUrl>github.com/kevinoid/auth-mailbox-joomla</authorUrl>
-	<version>1.0.4</version>
+	<version>1.0.6</version>
 	<description>PLUGINDESC</description>
 	<files>
 		<filename plugin="mailbox">mailbox.php</filename>
