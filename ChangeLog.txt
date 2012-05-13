@@ -1,3 +1,7 @@
+2012-04-13  Kevin Locke <klocke@digitalenginesoftware.com>
+
+    * *.*: Release 1.0.6  (No changes.)
+
 2012-03-30  Kevin Locke <klocke@digitalenginesoftware.com>
 
     * *.*: Release 1.0.5
