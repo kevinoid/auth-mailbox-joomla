@@ -1,3 +1,9 @@
+2013-04-07  Kevin Locke <kevin@kevinlocke.name>
+
+    * *.*: Release 1.0.7
+    * mailbox.xml: Update author/website information
+    * mailbox.xml: Add GitHub as an Update Server for the extension
+
 2012-04-13  Kevin Locke <klocke@digitalenginesoftware.com>
 
     * *.*: Release 1.0.6  (No changes.)
