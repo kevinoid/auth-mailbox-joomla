@@ -119,7 +119,8 @@ class plgAuthenticationMailbox extends JPlugin
 
 		if (!function_exists('imap_open')) {
 			$response->status = JAuthentication::STATUS_FAILURE;
-			$response->error_message = JText::_('ERRORIMAPNOTAVAIL');
+			$response->error_message =
+				JText::_('JGLOBAL_AUTH_FAILED', JText::_('ERRORIMAPNOTAVAIL'));
 			// Important, not shown from error_message in all cases
 			JError::raiseWarning(500, $response->error_message);
 			return;
@@ -128,7 +129,11 @@ class plgAuthenticationMailbox extends JPlugin
 		// Empty username/password can be interpreted as anonymous auth.
 		if (empty($credentials['username']) || empty($credentials['password'])) {
 			$response->status = JAuthentication::STATUS_FAILURE;
-			$response->error_message = JText::_('ERROREMPTYUSER');
+			$response->error_message =
+				JText::_(
+					'JGLOBAL_AUTH_FAILED',
+					JText::_('JGLOBAL_AUTH_EMPTY_PASS_NOT_ALLOWED')
+				);
 			return;
 		}
 
@@ -138,7 +143,11 @@ class plgAuthenticationMailbox extends JPlugin
 
 			if (!JUserHelper::getUserId($credentials['username'])) {
 				$response->status = JAuthentication::STATUS_FAILURE;
-				$response->error_message = JText::_('JGLOBAL_AUTH_NO_USER');
+				$response->error_message =
+					JText::_(
+						'JGLOBAL_AUTH_FAILED',
+						JText::_('JGLOBAL_AUTH_NO_USER')
+					);
 				return;
 			}
 		}
