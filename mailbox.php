@@ -118,7 +118,7 @@ class plgAuthenticationMailbox extends JPlugin
 		$response->type = 'Mailbox';
 
 		if (!function_exists('imap_open')) {
-			$response->status = JAUTHENTICATE_STATUS_FAILURE;
+			$response->status = JAuthentication::STATUS_FAILURE;
 			$response->error_message = JText::_('ERRORIMAPNOTAVAIL');
 			// Important, not shown from error_message in all cases
 			JError::raiseWarning(500, $response->error_message);
@@ -127,7 +127,7 @@ class plgAuthenticationMailbox extends JPlugin
 
 		// Empty username/password can be interpreted as anonymous auth.
 		if (empty($credentials['username']) || empty($credentials['password'])) {
-			$response->status = JAUTHENTICATE_STATUS_FAILURE;
+			$response->status = JAuthentication::STATUS_FAILURE;
 			$response->error_message = JText::_('ERROREMPTYUSER');
 			return;
 		}
@@ -137,7 +137,7 @@ class plgAuthenticationMailbox extends JPlugin
 			jimport('joomla.user.helper');
 
 			if (!JUserHelper::getUserId($credentials['username'])) {
-				$response->status = JAUTHENTICATE_STATUS_FAILURE;
+				$response->status = JAuthentication::STATUS_FAILURE;
 				$response->error_message = JText::_('JGLOBAL_AUTH_NO_USER');
 				return;
 			}
@@ -186,7 +186,7 @@ class plgAuthenticationMailbox extends JPlugin
 		);
 
 		if (!$mailboxStream) {
-			$response->status = JAUTHENTICATE_STATUS_FAILURE;
+			$response->status = JAuthentication::STATUS_FAILURE;
 
 			$imapErrors = imap_errors();
 			if (is_array($imapErrors) &&
@@ -207,7 +207,7 @@ class plgAuthenticationMailbox extends JPlugin
 		// Mailbox connection was successful, user authenticated
 		imap_close($mailboxStream);
 
-		$response->status = JAUTHENTICATE_STATUS_SUCCESS;
+		$response->status = JAuthentication::STATUS_SUCCESS;
 		$response->error_message = '';
 		if (isset($email)) {
 			$response->email = $email;
