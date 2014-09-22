@@ -17,6 +17,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted access');
 
+jimport('joomla.log.log');
 jimport('joomla.plugin.plugin');
 
 /**
@@ -179,6 +180,11 @@ class plgAuthenticationMailbox extends JPlugin
 		// Clear error stack
 		imap_errors();
 
+		JLog::add(
+			JText::sprintf('LOGIMAPOPEN', $mailboxStr, $username, $mailboxOpts),
+			JLog::DEBUG
+		);
+
 		$mailboxStream = @imap_open(
 			$mailboxStr,
 			$username, $credentials['password'],
@@ -206,6 +212,11 @@ class plgAuthenticationMailbox extends JPlugin
 
 		// Mailbox connection was successful, user authenticated
 		imap_close($mailboxStream);
+
+		JLog::add(
+			JText::sprintf('LOGAUTHENTICATED', $credentials['username']),
+			JLog::DEBUG
+		);
 
 		$response->status = JAUTHENTICATE_STATUS_SUCCESS;
 		$response->error_message = '';
