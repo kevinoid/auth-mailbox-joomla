@@ -36,7 +36,7 @@ class PlgAuthenticationMailbox extends JPlugin
 	 *
 	 * @access	private
 	 */
-	function _getMailboxString()
+	protected function getMailboxString()
 	{
 		$mailboxParts = array('{');
 		$mailboxParts[] = $this->params->get('mail_server');
@@ -96,7 +96,7 @@ class PlgAuthenticationMailbox extends JPlugin
 	 * @return	void
 	 * @since	1.6
 	 */
-	function onUserAuthenticate($credentials, $options, &$response)
+	public function onUserAuthenticate($credentials, $options, &$response)
 	{
 		// Load translatable strings for this plugin
 		$this->loadLanguage();
@@ -165,7 +165,7 @@ class PlgAuthenticationMailbox extends JPlugin
 		}
 
 		// Build mailbox options for imap_open
-		$mailboxStr = $this->_getMailboxString();
+		$mailboxStr = $this->getMailboxString();
 		$mailboxOpts = 0;
 		$protocol = $this->params->get('mail_protocol');
 
