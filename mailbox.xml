@@ -30,6 +30,10 @@
 					<option value="1">PARAMVALYES</option>
 					<option value="0">PARAMVALNO</option>
 				</field>
+				<field name="mail_domain_in_joomla_username" type="radio" default="0" label="PARAMDOMAINJUSERLABEL" description="PARAMDOMAINJUSERDESC">
+					<option value="1">PARAMVALYES</option>
+					<option value="0">PARAMVALNO</option>
+				</field>
 				<field name="mail_server" type="text" default="localhost" label="PARAMSERVERLABEL" description="PARAMSERVERDESC" />
 				<field name="mail_protocol" type="list" default="0" label="PARAMPROTOLABEL" description="PARAMPROTODESC">
 					<option value="imap">IMAP</option>
