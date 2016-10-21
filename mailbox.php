@@ -2,7 +2,6 @@
 /**
  * Source file for the Authentication - Mailbox plugin
  *
- * @version		$Id$
  * @package		Auth_Mailbox
  * @copyright	Copyright (C) 2010 - 2011 Digital Engine Software, LLC. All rights reserved.
  * @license		GNU/GPL <http://www.gnu.org/licenses/gpl-2.0.html>
