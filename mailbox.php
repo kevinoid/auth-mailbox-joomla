@@ -131,28 +131,42 @@ class plgAuthenticationMailbox extends JPlugin
 			return;
 		}
 
+		$username = $credentials['username'];
+		$atpos = strpos($username, '@');
+
+		if ($atpos === false) {
+			$mailDomain = $this->params->get('mail_domain');
+
+			if ($mailDomain) {
+				$email = $username . '@' . $mailDomain;
+			}
+		} else {
+			$email = $username;
+			$username = substr($username, 0, $atpos);
+		}
+
+		$joomlaUsername =
+			isset($email) && $this->params->get('mail_domain_in_joomla_username') ?
+				$email :
+				$username;
+		$mailboxUsername =
+			isset($email) && $this->params->get('mail_domain_username') ?
+				$email :
+				$username;
+
 		// Check that the user exists, if required
 		if (!$this->params->get('create_users')) {
 			jimport('joomla.user.helper');
 
-			if (!JUserHelper::getUserId($credentials['username'])) {
+			if (!JUserHelper::getUserId($joomlaUsername)) {
 				$response->status = JAUTHENTICATE_STATUS_FAILURE;
 				$response->error_message = JText::_('JGLOBAL_AUTH_NO_USER');
 				return;
 			}
 		}
 
-		$mailboxStr = $this->_getMailboxString();
-		$username = $credentials['username'];
-		$domain = $this->params->get('mail_domain');
-		if ($domain) {
-			$email = $username . '@' . $domain;
-			if ($this->params->get('mail_domain_username')) {
-				$username = $email;
-			}
-		}
-
 		// Build mailbox options for imap_open
+		$mailboxStr = $this->_getMailboxString();
 		$mailboxOpts = 0;
 		$protocol = $this->params->get('mail_protocol');
 
@@ -179,13 +193,18 @@ class plgAuthenticationMailbox extends JPlugin
 		imap_errors();
 
 		JLog::add(
-			JText::sprintf('LOGIMAPOPEN', $mailboxStr, $username, $mailboxOpts),
+			JText::sprintf(
+				'LOGIMAPOPEN',
+				$mailboxStr,
+				$mailboxUsername,
+				$mailboxOpts
+			),
 			JLog::DEBUG
 		);
 
 		$mailboxStream = @imap_open(
 			$mailboxStr,
-			$username, $credentials['password'],
+			$mailboxUsername, $credentials['password'],
 			$mailboxOpts, 1
 		);
 
@@ -212,12 +231,15 @@ class plgAuthenticationMailbox extends JPlugin
 		imap_close($mailboxStream);
 
 		JLog::add(
-			JText::sprintf('LOGAUTHENTICATED', $credentials['username']),
+			JText::sprintf('LOGAUTHENTICATED', $joomlaUsername),
 			JLog::DEBUG
 		);
 
 		$response->status = JAUTHENTICATE_STATUS_SUCCESS;
 		$response->error_message = '';
+		$response->fullname = $joomlaUsername;
+		$response->username = $joomlaUsername;
+
 		if (isset($email)) {
 			$response->email = $email;
 		}
