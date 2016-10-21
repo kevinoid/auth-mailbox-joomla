@@ -26,7 +26,7 @@ jimport('joomla.plugin.plugin');
  * @package	Auth_Mailbox
  * @since	1.0.0
  */
-class plgAuthenticationMailbox extends JPlugin
+class PlgAuthenticationMailbox extends JPlugin
 {
 	/**
 	 * Get the mailbox connection string for use in imap_open determined from
