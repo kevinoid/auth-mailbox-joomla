@@ -4,6 +4,7 @@
  *
  * @package		Auth_Mailbox
  * @copyright	Copyright (C) 2010 - 2011 Digital Engine Software, LLC. All rights reserved.
+ * @copyright	Copyright (C) 2013-2014, 2016 Kevin Locke <kevin@kevinlocke.name>. All rights reserved.
  * @license		GNU/GPL <http://www.gnu.org/licenses/gpl-2.0.html>
  * @since		1.0.0
  * Joomla! is free software. This version may have been modified pursuant
