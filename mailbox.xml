@@ -12,7 +12,7 @@
 	<license>GNU General Public License version 2 or later; see COPYING.txt</license>
 	<authorEmail>kevin@kevinlocke.name</authorEmail>
 	<authorUrl>https://github.com/kevinoid/auth-mailbox-joomla</authorUrl>
-	<version>1.0.8</version>
+	<version>1.0.9</version>
 	<description>PLUGINDESC</description>
 	<files>
 		<filename plugin="mailbox">mailbox.php</filename>
