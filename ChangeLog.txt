@@ -1,3 +1,8 @@
+2016-10-20  Kevin Locke <kevin@kevinlocke.name>
+
+    * *.*: Release 1.0.9
+    * mailbox.php: Add support for email address as username
+
 2014-09-21  Kevin Locke <kevin@kevinlocke.name>
 
     * *.*: Release 1.0.8
