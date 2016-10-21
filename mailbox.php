@@ -29,24 +29,6 @@ jimport('joomla.plugin.plugin');
 class plgAuthenticationMailbox extends JPlugin
 {
 	/**
-	 * Constructor
-	 *
-	 * For php4 compatability we must not use the __constructor as a constructor for plugins
-	 * because func_get_args (void) returns a copy of all passed arguments NOT references.
-	 * This causes problems with cross-referencing necessary for the observer design pattern.
-	 *
-	 * @param	object	&$subject	The object to observe
-	 * @param	array	$config		An array that holds the plugin configuration
-	 *
-	 * @since	1.5
-	 */
-	function plgAuthenticationMailbox(& $subject, $config)
-	{
-		parent::__construct($subject, $config);
-		$this->loadLanguage('', JPATH_ADMINISTRATOR);
-	}
-
-	/**
 	 * Get the mailbox connection string for use in imap_open determined from
 	 * the current param values.
 	 *
@@ -116,6 +98,9 @@ class plgAuthenticationMailbox extends JPlugin
 	 */
 	function onUserAuthenticate($credentials, $options, &$response)
 	{
+		// Load translatable strings for this plugin
+		$this->loadLanguage();
+
 		$response->type = 'Mailbox';
 
 		if (!function_exists('imap_open')) {
