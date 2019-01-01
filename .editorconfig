@@ -1,0 +1,12 @@
+# Shared editor configuration <https://editorconfig.org>
+
+# This is the top-most EditorConfig file which should apply to files below
+root = true
+
+[*]
+charset = utf-8
+# Don't enforce end_of_line.  Let git handle normalization for CRLF, if desired.
+# Match joomla-cms indent_style
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
