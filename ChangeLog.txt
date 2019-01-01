@@ -1,56 +1,56 @@
 2016-10-20  Kevin Locke <kevin@kevinlocke.name>
 
-    * *.*: Release 1.0.9
-    * mailbox.php: Add support for email address as username
+	* *.*: Release 1.0.9
+	* mailbox.php: Add support for email address as username
 
 2014-09-21  Kevin Locke <kevin@kevinlocke.name>
 
-    * *.*: Release 1.0.8
-    * mailbox.php: Additional debug logging of non-error codepaths
+	* *.*: Release 1.0.8
+	* mailbox.php: Additional debug logging of non-error codepaths
 
 2013-04-07  Kevin Locke <kevin@kevinlocke.name>
 
-    * *.*: Release 1.0.7
-    * *.*: Compatibility updates for Joomla! 3.0
-    * mailbox.xml: Update author/website information
-    * mailbox.xml: Add GitHub as an Update Server for the extension
+	* *.*: Release 1.0.7
+	* *.*: Compatibility updates for Joomla! 3.0
+	* mailbox.xml: Update author/website information
+	* mailbox.xml: Add GitHub as an Update Server for the extension
 
 2012-04-13  Kevin Locke <klocke@digitalenginesoftware.com>
 
-    * *.*: Release 1.0.6  (No changes.)
+	* *.*: Release 1.0.6  (No changes.)
 
 2012-03-30  Kevin Locke <klocke@digitalenginesoftware.com>
 
-    * *.*: Release 1.0.5
-    * *.*: Compatibility updates for Joomla! 2.5
+	* *.*: Release 1.0.5
+	* *.*: Compatibility updates for Joomla! 2.5
 
 2011-11-27  Kevin Locke <klocke@digitalenginesoftware.com>
 
-    * *.*: Release 1.0.4
-    * mailbox.php: Only request read-only access for IMAP protocol
-    * *.*: Rename "Show IMAP Errors" to "Show Protocol Errors"
+	* *.*: Release 1.0.4
+	* mailbox.php: Only request read-only access for IMAP protocol
+	* *.*: Rename "Show IMAP Errors" to "Show Protocol Errors"
 
 2011-10-16  Kevin Locke <klocke@digitalenginesoftware.com>
 
-    * *.*: Release 1.0.3
-    * mailbox.xml: Move "Server Port" option from basic to advanced section
-    * *.*: Add "Create User" option to control Joomla! user account creation
+	* *.*: Release 1.0.3
+	* mailbox.xml: Move "Server Port" option from basic to advanced section
+	* *.*: Add "Create User" option to control Joomla! user account creation
 
 2011-09-29  Kevin Locke <klocke@digitalenginesoftware.com>
 
-    * *.*: Release 1.0.2
-    * mailbox.php: Change onAuthenticate to onUserAuthenticate for Joomla! 1.6
-    * mailbox.xml: Update layout for Joomla! 1.6
-    * mailbox.xml: Change default port and update documentation
-    * *.ini: Change comments in language file from '#' to ';'
-    * *.ini: Quote all values
+	* *.*: Release 1.0.2
+	* mailbox.php: Change onAuthenticate to onUserAuthenticate for Joomla! 1.6
+	* mailbox.xml: Update layout for Joomla! 1.6
+	* mailbox.xml: Change default port and update documentation
+	* *.ini: Change comments in language file from '#' to ';'
+	* *.ini: Quote all values
 
 2011-07-28  Kevin Locke <klocke@digitalenginesoftware.com>
 
-    * mailbox.xml: Add parameter to show IMAP errors
-    * mailbox.php: Show IMAP errors on failure when configured to do so
-    * mailbox.php: Raise warnings for errors during authentication
+	* mailbox.xml: Add parameter to show IMAP errors
+	* mailbox.php: Show IMAP errors on failure when configured to do so
+	* mailbox.php: Raise warnings for errors during authentication
 
 2011-01-01  Kevin Locke <klocke@digitalenginesoftware.com>
 
-    * *.*: Initial Release (1.0.0)
+	* *.*: Initial Release (1.0.0)
