@@ -9,7 +9,19 @@
 	https://github.com/joomla/coding-standards
 	-->
 	<config name="installed_paths" value="vendor/joomla/coding-standards" />
-	<rule ref="Joomla" />
+	<rule ref="Joomla">
+		<!--
+		Can't enforce variable name convention, since some Joomla!
+		member variables we use don't comply (e.g. error_message in
+		Joomla\CMS\Authentication\AuthenticationResponse) and PHPCS
+		doesn't have a way to ignore/exclude individual names.
+		https://stackoverflow.com/q/7048080
+
+		TODO: Subclass Joomla_Sniffs_NamingConventions_ValidVariableNameSniff
+		with list of excludes (and discuss with upstream).
+		-->
+		<exclude name="Joomla.NamingConventions.ValidVariableName" />
+	</rule>
 
 	<!-- Exclude dependencies -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
