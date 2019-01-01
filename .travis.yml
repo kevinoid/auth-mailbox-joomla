@@ -1,0 +1,27 @@
+# Travis CI Configuration File
+# https://docs.travis-ci.com/user/customizing-the-build/
+
+language: php
+
+# Consider testing on PHP versions supported by Joomla!
+# https://downloads.joomla.org/technical-requirements
+# Currently only linting is done, so version doesn't matter.
+#php:
+#  - 5.3
+#  - 7.0
+#  - 7.3
+
+# To test on multiple OSes, uncomment this.
+#os:
+#  - linux
+#  - osx
+
+sudo: false
+
+install:
+  # Ignore composer.lock to test against current versions of dependencies.
+  - rm -f composer.lock
+  - composer install
+
+script:
+  - ./vendor/bin/phpcs .

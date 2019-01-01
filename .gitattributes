@@ -5,6 +5,7 @@
 .gitattributes		export-ignore
 .githooks		export-ignore
 .gitignore		export-ignore
+.travis.yml		export-ignore
 composer.json		export-ignore
 composer.lock		export-ignore
 mailbox-updates.xml	export-ignore
