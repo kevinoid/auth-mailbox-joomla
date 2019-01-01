@@ -9,13 +9,13 @@
 		<type>plugin</type>
 		<folder>authentication</folder>
 		<client>0</client>
- 
+
 		<version>1.0.6</version>
 		<infourl title="Mailbox ChangeLog">https://raw.github.com/kevinoid/auth-mailbox-joomla/v1.0.6/ChangeLog.txt</infourl>
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/kevinoid/auth-mailbox-joomla/archive/v1.0.6.zip</downloadurl>
 		</downloads>
- 
+
 		<targetplatform name="joomla" version="2.5" />
 	</update>
 
@@ -28,13 +28,13 @@
 		<type>plugin</type>
 		<folder>authentication</folder>
 		<client>0</client>
- 
+
 		<version>1.0.7</version>
 		<infourl title="Mailbox ChangeLog">https://raw.github.com/kevinoid/auth-mailbox-joomla/v1.0.7-for-joomla2.5/ChangeLog.txt</infourl>
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/kevinoid/auth-mailbox-joomla/archive/v1.0.7-for-joomla2.5.zip</downloadurl>
 		</downloads>
- 
+
 		<targetplatform name="joomla" version="2.5" />
 	</update>
 	<update>
@@ -46,13 +46,13 @@
 		<type>plugin</type>
 		<folder>authentication</folder>
 		<client>0</client>
- 
+
 		<version>1.0.7</version>
 		<infourl title="Mailbox ChangeLog">https://raw.github.com/kevinoid/auth-mailbox-joomla/v1.0.7-for-joomla3.0/ChangeLog.txt</infourl>
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/kevinoid/auth-mailbox-joomla/archive/v1.0.7-for-joomla3.0.zip</downloadurl>
 		</downloads>
- 
+
 		<targetplatform name="joomla" version="3.0" />
 	</update>
 
@@ -65,13 +65,13 @@
 		<type>plugin</type>
 		<folder>authentication</folder>
 		<client>0</client>
- 
+
 		<version>1.0.8</version>
 		<infourl title="Mailbox ChangeLog">https://raw.github.com/kevinoid/auth-mailbox-joomla/v1.0.8-for-joomla2.5/ChangeLog.txt</infourl>
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/kevinoid/auth-mailbox-joomla/archive/v1.0.8-for-joomla2.5.zip</downloadurl>
 		</downloads>
- 
+
 		<targetplatform name="joomla" version="2.5" />
 	</update>
 	<update>
@@ -83,13 +83,13 @@
 		<type>plugin</type>
 		<folder>authentication</folder>
 		<client>0</client>
- 
+
 		<version>1.0.8</version>
 		<infourl title="Mailbox ChangeLog">https://raw.github.com/kevinoid/auth-mailbox-joomla/v1.0.8-for-joomla3.0/ChangeLog.txt</infourl>
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/kevinoid/auth-mailbox-joomla/archive/v1.0.8-for-joomla3.0.zip</downloadurl>
 		</downloads>
- 
+
 		<targetplatform name="joomla" version="3.0" />
 	</update>
 
