@@ -4,6 +4,8 @@
 .editorconfig		export-ignore
 .gitattributes		export-ignore
 .gitignore		export-ignore
+composer.json		export-ignore
+composer.lock		export-ignore
 mailbox-updates.xml	export-ignore
 
 # Configure EOL handling in this repository to allow CRLF locally, commit LF:

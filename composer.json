@@ -1,0 +1,28 @@
+{
+    "name": "kevinoid/auth-mailbox-joomla",
+    "description": "Plugin for Joomla! to authenticate users against a mail server using IMAP, NNTP, or POP3.",
+    "homepage": "https://github.com/kevinoid/auth-mailbox-joomla",
+    "support": {
+        "issues": "https://github.com/kevinoid/auth-mailbox-joomla/issues",
+        "source": "https://github.com/kevinoid/auth-mailbox-joomla.git"
+    },
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Kevin Locke",
+            "email": "kevin@kevinlocke.name"
+        }
+    ],
+    "readme": "README.txt",
+    "type": "joomla-extension",
+    "keywords": [
+        "joomla",
+        "extension"
+    ],
+    "archive": {
+        "exclude": [
+            "mailbox-updates.xml"
+        ]
+    },
+    "require": {}
+}
