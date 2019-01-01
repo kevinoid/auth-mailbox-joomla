@@ -7,6 +7,7 @@
 composer.json		export-ignore
 composer.lock		export-ignore
 mailbox-updates.xml	export-ignore
+phpcs.xml.dist		export-ignore
 
 # Configure EOL handling in this repository to allow CRLF locally, commit LF:
 # https://help.github.com/articles/dealing-with-line-endings/

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="plg_authentication_mailbox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://github.com/squizlabs/PHP_CodeSniffer/raw/master/phpcs.xsd">
+	<description>The coding standard for Joomla! Mailbox Authentication plugin.</description>
+
+	<!--
+	Follow the Joomla Coding Standards.
+	https://github.com/joomla/coding-standards
+	-->
+	<config name="installed_paths" value="vendor/joomla/coding-standards" />
+	<rule ref="Joomla" />
+
+	<!-- Exclude dependencies -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+</ruleset>

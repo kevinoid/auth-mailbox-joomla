@@ -24,5 +24,8 @@
             "mailbox-updates.xml"
         ]
     },
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "joomla/coding-standards": "~2.0@alpha"
+    }
 }
