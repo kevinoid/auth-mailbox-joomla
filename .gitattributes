@@ -1,3 +1,11 @@
+# gitattributes(5) file which defines repo-specific git attributes for paths
+
+# Exclude files from git- (and GitHub-) generated release archives
 .editorconfig		export-ignore
 .gitattributes		export-ignore
 mailbox-updates.xml	export-ignore
+
+# Configure EOL handling in this repository to allow CRLF locally, commit LF:
+# https://help.github.com/articles/dealing-with-line-endings/
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
