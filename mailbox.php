@@ -42,7 +42,9 @@ class PlgAuthenticationMailbox extends JPlugin
 		$mailboxParts[] = $this->params->get('mail_server');
 
 		$port = $this->params->get('mail_port');
-		if ($port) {
+
+		if ($port)
+		{
 			$mailboxParts[] = ':';
 			$mailboxParts[] = $port;
 		}
@@ -51,11 +53,13 @@ class PlgAuthenticationMailbox extends JPlugin
 		$mailboxParts[] = '/service=' . $protocol;
 
 		// Note:  /readonly only supported for IMAP, errors with SMTP & POP3
-		if ($protocol === 'imap') {
+		if ($protocol === 'imap')
+		{
 			$mailboxParts[] = '/readonly';
 		}
 
-		switch ($this->params->get('mail_encryption')) {
+		switch ($this->params->get('mail_encryption'))
+		{
 			case 0:
 				$mailboxParts[] = '/notls';
 				break;
@@ -70,13 +74,17 @@ class PlgAuthenticationMailbox extends JPlugin
 				break;
 		}
 
-		if (!$this->params->get('mail_allow_plaintext')) {
+		if (!$this->params->get('mail_allow_plaintext'))
+		{
 			$mailboxParts[] = '/secure';
 		}
 
-		if ($this->params->get('mail_validate_cert')) {
+		if ($this->params->get('mail_validate_cert'))
+		{
 			$mailboxParts[] = '/validate-cert';
-		} else {
+		}
+		else
+		{
 			$mailboxParts[] = '/novalidate-cert';
 		}
 
@@ -90,7 +98,7 @@ class PlgAuthenticationMailbox extends JPlugin
 	 *
 	 * @param	array	$credentials	Array holding the user credentials
 	 * @param	array	$options		Array of extra options
-	 * @param	object	&$response		Authentication response object
+	 * @param	object	$response		Authentication response object
 	 *
 	 * @access	public
 	 * @return	void
@@ -103,63 +111,72 @@ class PlgAuthenticationMailbox extends JPlugin
 
 		$response->type = 'Mailbox';
 
-		if (!function_exists('imap_open')) {
+		if (!function_exists('imap_open'))
+		{
 			$response->status = JAuthentication::STATUS_FAILURE;
-			$response->error_message =
-				JText::sprintf(
-					'JGLOBAL_AUTH_FAILED',
-					JText::_('ERRORIMAPNOTAVAIL')
-				);
+			$response->error_message = JText::sprintf(
+				'JGLOBAL_AUTH_FAILED',
+				JText::_('ERRORIMAPNOTAVAIL')
+			);
+
 			// Important, not shown from error_message in all cases
 			JError::raiseWarning(500, $response->error_message);
+
 			return;
 		}
 
 		// Empty username/password can be interpreted as anonymous auth.
-		if (empty($credentials['username']) || empty($credentials['password'])) {
+		if (empty($credentials['username']) || empty($credentials['password']))
+		{
 			$response->status = JAuthentication::STATUS_FAILURE;
-			$response->error_message =
-				JText::sprintf(
-					'JGLOBAL_AUTH_FAILED',
-					JText::_('JGLOBAL_AUTH_EMPTY_PASS_NOT_ALLOWED')
-				);
+			$response->error_message = JText::sprintf(
+				'JGLOBAL_AUTH_FAILED',
+				JText::_('JGLOBAL_AUTH_EMPTY_PASS_NOT_ALLOWED')
+			);
+
 			return;
 		}
 
 		$username = $credentials['username'];
 		$atpos = strpos($username, '@');
 
-		if ($atpos === false) {
+		if ($atpos === false)
+		{
 			$mailDomain = $this->params->get('mail_domain');
 
-			if ($mailDomain) {
+			if ($mailDomain)
+			{
 				$email = $username . '@' . $mailDomain;
 			}
-		} else {
+		}
+		else
+		{
 			$email = $username;
 			$username = substr($username, 0, $atpos);
 		}
 
-		$joomlaUsername =
-			isset($email) && $this->params->get('mail_domain_in_joomla_username') ?
+		$joomlaUsername
+			= isset($email) && $this->params->get('mail_domain_in_joomla_username') ?
 				$email :
 				$username;
-		$mailboxUsername =
-			isset($email) && $this->params->get('mail_domain_username') ?
+		$mailboxUsername
+			= isset($email) && $this->params->get('mail_domain_username') ?
 				$email :
 				$username;
 
 		// Check that the user exists, if required
-		if (!$this->params->get('create_users')) {
+		if (!$this->params->get('create_users'))
+		{
 			jimport('joomla.user.helper');
 
-			if (!JUserHelper::getUserId($joomlaUsername)) {
+			if (!JUserHelper::getUserId($joomlaUsername))
+			{
 				$response->status = JAuthentication::STATUS_FAILURE;
-				$response->error_message =
-					JText::sprintf(
-						'JGLOBAL_AUTH_FAILED',
-						JText::_('JGLOBAL_AUTH_NO_USER')
-					);
+				$response->error_message = JText::sprintf(
+					'JGLOBAL_AUTH_FAILED',
+					JText::_('JGLOBAL_AUTH_NO_USER')
+				);
+
 				return;
 			}
 		}
@@ -170,16 +187,19 @@ class PlgAuthenticationMailbox extends JPlugin
 		$protocol = $this->params->get('mail_protocol');
 
 		// Note:  OP_READONLY only supported for IMAP, errors with SMTP & POP3
-		if ($protocol === 'imap') {
+		if ($protocol === 'imap')
+		{
 			$mailboxOpts |= OP_READONLY;
 		}
 
-		if (!$this->params->get('mail_allow_plaintext')) {
+		if (!$this->params->get('mail_allow_plaintext'))
+		{
 			$mailboxOpts |= OP_SECURE;
 		}
 
 		// Note:  OP_HALFOPEN only supported for IMAP and NNTP
-		switch ($protocol) {
+		switch ($protocol)
+		{
 			case 'imap':
 			case 'nntp':
 				$mailboxOpts |= OP_HALFOPEN;
@@ -207,19 +227,25 @@ class PlgAuthenticationMailbox extends JPlugin
 			$mailboxOpts, 1
 		);
 
-		if (!$mailboxStream) {
+		if (!$mailboxStream)
+		{
 			$response->status = JAuthentication::STATUS_FAILURE;
 
 			$imapErrors = imap_errors();
-			if (is_array($imapErrors) &&
-					$this->params->get('show_imap_errors')) {
+
+			if (is_array($imapErrors)
+				&& $this->params->get('show_imap_errors'))
+			{
 				$response->error_message = JText::sprintf(
 					'ERRORCONNECTWITHMSG',
 					implode('<br />', $imapErrors)
 				);
+
 				// Important, not shown from error_message in all cases
 				JError::raiseWarning(500, $response->error_message);
-			} else {
+			}
+			else
+			{
 				$response->error_message = JText::_('ERRORCONNECT');
 			}
 
@@ -239,7 +265,8 @@ class PlgAuthenticationMailbox extends JPlugin
 		$response->fullname = $joomlaUsername;
 		$response->username = $joomlaUsername;
 
-		if (isset($email)) {
+		if (isset($email))
+		{
 			$response->email = $email;
 		}
 	}
