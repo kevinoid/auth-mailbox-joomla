@@ -17,7 +17,15 @@
 		<folder>language</folder>
 	</files>
 	<updateservers>
-		<server type="extension" priority="1" name="Mailbox Authentication Plugin on GitHub">https://raw.github.com/kevinoid/auth-mailbox-joomla/master/mailbox-updates.xml</server>
+		<server
+			type="extension"
+			priority="1"
+			name="Mailbox
+			Authentication
+			Plugin
+			on
+			GitHub"
+			>https://raw.github.com/kevinoid/auth-mailbox-joomla/master/mailbox-updates.xml</server>
 	</updateservers>
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_authentication_mailbox.ini</language>
@@ -26,44 +34,110 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="mail_domain" type="text" default="example.com" label="PLG_AUTH_MAILBOX_DOMAINLABEL" description="PLG_AUTH_MAILBOX_DOMAINDESC" />
-				<field name="mail_domain_username" type="radio" default="0" label="PLG_AUTH_MAILBOX_DOMAINUSERLABEL" description="PLG_AUTH_MAILBOX_DOMAINUSERDESC">
+				<field
+					name="mail_domain"
+					type="text"
+					default="example.com"
+					label="PLG_AUTH_MAILBOX_DOMAINLABEL"
+					description="PLG_AUTH_MAILBOX_DOMAINDESC"
+					/>
+				<field
+					name="mail_domain_username"
+					type="radio"
+					default="0"
+					label="PLG_AUTH_MAILBOX_DOMAINUSERLABEL"
+					description="PLG_AUTH_MAILBOX_DOMAINUSERDESC"
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="mail_domain_in_joomla_username" type="radio" default="0" label="PLG_AUTH_MAILBOX_DOMAINJUSERLABEL" description="PLG_AUTH_MAILBOX_DOMAINJUSERDESC">
+				<field
+					name="mail_domain_in_joomla_username"
+					type="radio"
+					default="0"
+					label="PLG_AUTH_MAILBOX_DOMAINJUSERLABEL"
+					description="PLG_AUTH_MAILBOX_DOMAINJUSERDESC"
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="mail_server" type="text" default="localhost" label="PLG_AUTH_MAILBOX_SERVERLABEL" description="PLG_AUTH_MAILBOX_SERVERDESC" />
-				<field name="mail_protocol" type="list" default="0" label="PLG_AUTH_MAILBOX_PROTOLABEL" description="PLG_AUTH_MAILBOX_PROTODESC">
+				<field
+					name="mail_server"
+					type="text"
+					default="localhost"
+					label="PLG_AUTH_MAILBOX_SERVERLABEL"
+					description="PLG_AUTH_MAILBOX_SERVERDESC"
+					/>
+				<field
+					name="mail_protocol"
+					type="list"
+					default="0"
+					label="PLG_AUTH_MAILBOX_PROTOLABEL"
+					description="PLG_AUTH_MAILBOX_PROTODESC"
+					>
 					<option value="imap">IMAP</option>
 					<option value="nntp">NNTP</option>
 					<option value="pop3">POP3</option>
 				</field>
-				<field name="create_users" type="radio" default="1" label="PLG_AUTH_MAILBOX_CREATEUSERSLABEL" description="PLG_AUTH_MAILBOX_CREATEUSERSDESC">
+				<field
+					name="create_users"
+					type="radio"
+					default="1"
+					label="PLG_AUTH_MAILBOX_CREATEUSERSLABEL"
+					description="PLG_AUTH_MAILBOX_CREATEUSERSDESC"
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 			</fieldset>
 
 			<fieldset name="advanced">
-				<field name="mail_port" type="text" default="" label="PLG_AUTH_MAILBOX_PORTLABEL" description="PLG_AUTH_MAILBOX_PORTDESC" />
-				<field name="mail_allow_plaintext" type="radio" default="0" label="PLG_AUTH_MAILBOX_ALLOWPLAINLABEL" description="PLG_AUTH_MAILBOX_ALLOWPLAINDESC">
+				<field
+					name="mail_port"
+					type="text"
+					default=""
+					label="PLG_AUTH_MAILBOX_PORTLABEL"
+					description="PLG_AUTH_MAILBOX_PORTDESC"
+					/>
+				<field
+					name="mail_allow_plaintext"
+					type="radio"
+					default="0"
+					label="PLG_AUTH_MAILBOX_ALLOWPLAINLABEL"
+					description="PLG_AUTH_MAILBOX_ALLOWPLAINDESC"
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="mail_encryption" type="list" default="1" label="PLG_AUTH_MAILBOX_ENCRYPTLABEL" description="PLG_AUTH_MAILBOX_ENCRYPTDESC">
+				<field
+					name="mail_encryption"
+					type="list"
+					default="1"
+					label="PLG_AUTH_MAILBOX_ENCRYPTLABEL"
+					description="PLG_AUTH_MAILBOX_ENCRYPTDESC"
+					>
 					<option value="0">PLG_AUTH_MAILBOX_VALENCRYPTNONE</option>
 					<option value="1">PLG_AUTH_MAILBOX_VALENCRYPTTLSOPT</option>
 					<option value="2">PLG_AUTH_MAILBOX_VALENCRYPTTLSREQ</option>
 					<option value="3">PLG_AUTH_MAILBOX_VALENCRYPTSSL</option>
 				</field>
-				<field name="mail_validate_cert" type="radio" default="1" label="PLG_AUTH_MAILBOX_VALIDCERTLABEL" description="PLG_AUTH_MAILBOX_VALIDCERTDESC">
+				<field
+					name="mail_validate_cert"
+					type="radio"
+					default="1"
+					label="PLG_AUTH_MAILBOX_VALIDCERTLABEL"
+					description="PLG_AUTH_MAILBOX_VALIDCERTDESC"
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="show_imap_errors" type="radio" default="0" label="PLG_AUTH_MAILBOX_IMAPERRLABEL" description="PLG_AUTH_MAILBOX_IMAPERRDESC">
+				<field
+					name="show_imap_errors"
+					type="radio"
+					default="0"
+					label="PLG_AUTH_MAILBOX_IMAPERRLABEL"
+					description="PLG_AUTH_MAILBOX_IMAPERRDESC"
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
