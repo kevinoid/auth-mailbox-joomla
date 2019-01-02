@@ -44,6 +44,7 @@
 				<field
 					name="mail_domain_username"
 					type="radio"
+					class="btn-group btn-group-yesno"
 					default="0"
 					label="PLG_AUTH_MAILBOX_DOMAINUSERLABEL"
 					description="PLG_AUTH_MAILBOX_DOMAINUSERDESC"
@@ -54,6 +55,7 @@
 				<field
 					name="mail_domain_in_joomla_username"
 					type="radio"
+					class="btn-group btn-group-yesno"
 					default="0"
 					label="PLG_AUTH_MAILBOX_DOMAINJUSERLABEL"
 					description="PLG_AUTH_MAILBOX_DOMAINJUSERDESC"
@@ -82,6 +84,7 @@
 				<field
 					name="create_users"
 					type="radio"
+					class="btn-group btn-group-yesno"
 					default="1"
 					label="PLG_AUTH_MAILBOX_CREATEUSERSLABEL"
 					description="PLG_AUTH_MAILBOX_CREATEUSERSDESC"
@@ -102,6 +105,7 @@
 				<field
 					name="mail_allow_plaintext"
 					type="radio"
+					class="btn-group btn-group-yesno"
 					default="0"
 					label="PLG_AUTH_MAILBOX_ALLOWPLAINLABEL"
 					description="PLG_AUTH_MAILBOX_ALLOWPLAINDESC"
@@ -124,6 +128,7 @@
 				<field
 					name="mail_validate_cert"
 					type="radio"
+					class="btn-group btn-group-yesno"
 					default="1"
 					label="PLG_AUTH_MAILBOX_VALIDCERTLABEL"
 					description="PLG_AUTH_MAILBOX_VALIDCERTDESC"
@@ -134,6 +139,7 @@
 				<field
 					name="show_imap_errors"
 					type="radio"
+					class="btn-group btn-group-yesno"
 					default="0"
 					label="PLG_AUTH_MAILBOX_IMAPERRLABEL"
 					description="PLG_AUTH_MAILBOX_IMAPERRDESC"
