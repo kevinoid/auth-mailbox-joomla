@@ -27,6 +27,6 @@ Currently unsupported features:
    supports authentication against a single mail server (although the address
    to which it connects may be load-balanced to multiple servers transparently).
 
-Installation instructions are available in INSTALL.txt.
-Major changes are listed in ChangeLog.txt.
-Complete license text is available in COPYING.txt.
+Installation instructions are available in [INSTALL.md](INSTALL.md).
+Major changes are listed in [ChangeLog.txt](ChangeLog.txt).
+Complete license text is available in [COPYING.txt](COPYING.txt).
