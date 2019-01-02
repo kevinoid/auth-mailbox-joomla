@@ -14,13 +14,14 @@
 	<description>PLG_AUTH_MAILBOX_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="mailbox">mailbox.php</filename>
+		<folder>language</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="Mailbox Authentication Plugin on GitHub">https://raw.github.com/kevinoid/auth-mailbox-joomla/master/mailbox-updates.xml</server>
 	</updateservers>
 	<languages>
-		<language tag="en-GB">en-GB.plg_authentication_mailbox.ini</language>
-		<language tag="en-GB">en-GB.plg_authentication_mailbox.sys.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_authentication_mailbox.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_authentication_mailbox.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
