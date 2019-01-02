@@ -116,7 +116,7 @@ class PlgAuthenticationMailbox extends JPlugin
 			$response->status = JAuthentication::STATUS_FAILURE;
 			$response->error_message = JText::sprintf(
 				'JGLOBAL_AUTH_FAILED',
-				JText::_('ERRORIMAPNOTAVAIL')
+				JText::_('PLG_AUTH_MAILBOX_ERRORIMAPNOTAVAIL')
 			);
 
 			// Important, not shown from error_message in all cases
@@ -213,7 +213,7 @@ class PlgAuthenticationMailbox extends JPlugin
 
 		JLog::add(
 			JText::sprintf(
-				'LOGIMAPOPEN',
+				'PLG_AUTH_MAILBOX_LOGIMAPOPEN',
 				$mailboxStr,
 				$mailboxUsername,
 				$mailboxOpts
@@ -237,7 +237,7 @@ class PlgAuthenticationMailbox extends JPlugin
 				&& $this->params->get('show_imap_errors'))
 			{
 				$response->error_message = JText::sprintf(
-					'ERRORCONNECTWITHMSG',
+					'PLG_AUTH_MAILBOX_ERRORCONNECTWITHMSG',
 					implode('<br />', $imapErrors)
 				);
 
@@ -246,7 +246,8 @@ class PlgAuthenticationMailbox extends JPlugin
 			}
 			else
 			{
-				$response->error_message = JText::_('ERRORCONNECT');
+				$response->error_message
+					= JText::_('PLG_AUTH_MAILBOX_ERRORCONNECT');
 			}
 
 			return;
@@ -256,7 +257,7 @@ class PlgAuthenticationMailbox extends JPlugin
 		imap_close($mailboxStream);
 
 		JLog::add(
-			JText::sprintf('LOGAUTHENTICATED', $joomlaUsername),
+			JText::sprintf('PLG_AUTH_MAILBOX_LOGAUTHENTICATED', $joomlaUsername),
 			JLog::DEBUG
 		);
 
