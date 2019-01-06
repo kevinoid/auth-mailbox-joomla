@@ -6,6 +6,7 @@
 .githooks		export-ignore
 .gitignore		export-ignore
 .travis.yml		export-ignore
+/media/images/mailbox-logo-header.svg	export-ignore
 composer.json		export-ignore
 composer.lock		export-ignore
 mailbox-updates.xml	export-ignore
