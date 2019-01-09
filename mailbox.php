@@ -119,8 +119,23 @@ class PlgAuthenticationMailbox extends JPlugin
 				JText::_('PLG_AUTH_MAILBOX_ERRORIMAPNOTAVAIL')
 			);
 
-			// Important, not shown from error_message in all cases
-			JError::raiseWarning(500, $response->error_message);
+			JLog::add(
+				$response->error_message,
+				JLog::ERROR,
+				'authentication_mailbox'
+			);
+
+			/*
+			 * Alert user to misconfiguration, since
+			 * Authentication->authenticate only returns AuthenticationResponse
+			 * for the last plugin and CMSApplication->login only displays it
+			 * when $options['silent'] is falsey.  Better to see 2 copies than
+			 * none.
+			 */
+			JFactory::getApplication()->enqueueMessage(
+				htmlspecialchars($response->error_message),
+				'warning'
+			);
 
 			return;
 		}
@@ -218,7 +233,8 @@ class PlgAuthenticationMailbox extends JPlugin
 				$mailboxUsername,
 				$mailboxOpts
 			),
-			JLog::DEBUG
+			JLog::DEBUG,
+			'authentication_mailbox'
 		);
 
 		$mailboxStream = @imap_open(
@@ -230,19 +246,37 @@ class PlgAuthenticationMailbox extends JPlugin
 		if (!$mailboxStream)
 		{
 			$response->status = JAuthentication::STATUS_FAILURE;
+			$imapErrors = imap_errors() ?: array();
 
-			$imapErrors = imap_errors();
+			$errorMessage = JText::sprintf(
+				'PLG_AUTH_MAILBOX_ERRORCONNECTWITHMSG',
+				implode("\n", $imapErrors)
+			);
 
-			if (is_array($imapErrors)
-				&& $this->params->get('show_imap_errors'))
+			// Multi-line log messages can be problematic in log files.  Use ;
+			$errorMessageForLog = str_replace("\n", '; ', $errorMessage);
+			JLog::add(
+				$errorMessageForLog,
+				JLog::WARNING,
+				'authentication_mailbox'
+			);
+
+			if ($this->params->get('show_imap_errors'))
 			{
-				$response->error_message = JText::sprintf(
-					'PLG_AUTH_MAILBOX_ERRORCONNECTWITHMSG',
-					implode('<br />', $imapErrors)
-				);
+				$response->error_message = $errorMessageForLog;
 
-				// Important, not shown from error_message in all cases
-				JError::raiseWarning(500, $response->error_message);
+				/*
+				 * Display error to user user as requested by configuration.
+				 * Note:  Authentication->authenticate only returns
+				 * AuthenticationResponse for the last plugin and
+				 * CMSApplication->login only displays it when
+				 * $options['silent'] is falsey.  Better to see 2 copies than
+				 * none.
+				 */
+				JFactory::getApplication()->enqueueMessage(
+					str_replace("\n", '<br />', htmlspecialchars($errorMessage)),
+					'warning'
+				);
 			}
 			else
 			{
@@ -258,7 +292,8 @@ class PlgAuthenticationMailbox extends JPlugin
 
 		JLog::add(
 			JText::sprintf('PLG_AUTH_MAILBOX_LOGAUTHENTICATED', $joomlaUsername),
-			JLog::DEBUG
+			JLog::DEBUG,
+			'authentication_mailbox'
 		);
 
 		$response->status = JAuthentication::STATUS_SUCCESS;
