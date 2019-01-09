@@ -25,7 +25,7 @@
 			Plugin
 			on
 			GitHub"
-			>https://raw.github.com/kevinoid/auth-mailbox-joomla/master/mailbox-updates.xml</server>
+			>https://kevinoid.github.io/auth-mailbox-joomla/updates.xml</server>
 	</updateservers>
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_authentication_mailbox.ini</language>

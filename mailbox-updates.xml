@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+IMPORTANT:  This file is deprecated and will be removed in the future.
+Future updates will be distributed via updates.xml on the gh-pages branch at
+https://kevinoid.github.io/auth-mailbox-joomla/updates.xml
+-->
 <updates>
 	<update>
 		<name>Authentication - Mailbox</name>
