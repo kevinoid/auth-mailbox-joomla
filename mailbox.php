@@ -102,7 +102,6 @@ class PlgAuthenticationMailbox extends JPlugin
 	 *
 	 * @access	public
 	 * @return	void
-	 * @since	1.6
 	 */
 	public function onUserAuthenticate($credentials, $options, &$response)
 	{
