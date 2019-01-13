@@ -176,20 +176,16 @@ class PlgAuthenticationMailbox extends JPlugin
 				$username;
 
 		// Check that the user exists, if required
-		if (!$this->params->get('create_users'))
+		if (!$this->params->get('create_users')
+			&& !JUserHelper::getUserId($joomlaUsername))
 		{
-			jimport('joomla.user.helper');
+			$response->status = JAuthentication::STATUS_FAILURE;
+			$response->error_message = JText::sprintf(
+				'JGLOBAL_AUTH_FAILED',
+				JText::_('JGLOBAL_AUTH_NO_USER')
+			);
 
-			if (!JUserHelper::getUserId($joomlaUsername))
-			{
-				$response->status = JAuthentication::STATUS_FAILURE;
-				$response->error_message = JText::sprintf(
-					'JGLOBAL_AUTH_FAILED',
-					JText::_('JGLOBAL_AUTH_NO_USER')
-				);
-
-				return;
-			}
+			return;
 		}
 
 		// Build mailbox options for imap_open
