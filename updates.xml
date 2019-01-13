@@ -129,4 +129,23 @@
 
 		<targetplatform name="joomla" version="3.0" />
 	</update>
+	<update>
+		<name>Authentication - Mailbox</name>
+		<description>Plugin to authenticate users against a mail server by attempted mailbox login using IMAP, NNTP, or POP3.</description>
+		<maintainer>Kevin Locke</maintainer>
+		<maintainerurl>https://github.com/kevinoid/auth-mailbox-joomla/</maintainerurl>
+		<element>plg_authentication_mailbox</element>
+		<type>plugin</type>
+		<folder>authentication</folder>
+		<client>0</client>
+
+		<version>1.0.10</version>
+		<infourl title="Mailbox ChangeLog">https://raw.github.com/kevinoid/auth-mailbox-joomla/v1.0.10/ChangeLog.txt</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/kevinoid/auth-mailbox-joomla/archive/v1.0.10.zip</downloadurl>
+			<downloadurl type="full" format="tar">https://github.com/kevinoid/auth-mailbox-joomla/archive/v1.0.10.tar.gz</downloadurl>
+		</downloads>
+
+		<targetplatform name="joomla" version="[34]\..*" />
+	</update>
 </updates>
