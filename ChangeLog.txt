@@ -1,3 +1,16 @@
+2019-01-13  Kevin Locke <kevin@kevinlocke.name>
+
+	* *.*: Release 1.0.10
+	* language/es-ES: Add es-ES translation from Manuel Pérez Ayala
+	* mailbox.script.php: Check for imap_open in preflight
+	* mailbox.php: Drop support for Joomla! 2.5 and earlier
+	* mailbox.php: Improved error display and logging
+	* mailbox.xml: Use yes/no button groups
+	* mailbox.xml: Use Joomla!-provided yes/no translation keys
+	* mailbox.xml: Use github.io as update server
+	* *.*: Use PHP_CodeSniffer (from Composer) for linting
+	* *.*: Add git hooks and CI to check linting
+
 2016-10-20  Kevin Locke <kevin@kevinlocke.name>
 
 	* *.*: Release 1.0.9
