@@ -136,8 +136,8 @@ class PlgAuthenticationMailbox extends JPlugin
 			return;
 		}
 
-		// Empty username/password can be interpreted as anonymous auth.
-		if (empty($credentials['username']) || empty($credentials['password']))
+		// Explicitly reject empty passwords, which are never allowed.
+		if (empty($credentials['password']))
 		{
 			$response->status = JAuthentication::STATUS_FAILURE;
 			$response->error_message = JText::sprintf(
@@ -150,6 +150,20 @@ class PlgAuthenticationMailbox extends JPlugin
 
 		$username = $credentials['username'];
 		$atpos = strrpos($username, '@');
+
+		// Reject empty usernames, empty local part, or empty domain part
+		if (empty($username)
+			|| $atpos === 0
+			|| $atpos === strlen($username) - 1)
+		{
+			$response->status = JAuthentication::STATUS_FAILURE;
+			$response->error_message = JText::sprintf(
+				'JGLOBAL_AUTH_FAILED',
+				JText::_('JGLOBAL_AUTH_USER_BLACKLISTED')
+			);
+
+			return;
+		}
 
 		if ($atpos === false)
 		{
