@@ -12,6 +12,7 @@
 	<authorUrl>https://github.com/kevinoid/auth-mailbox-joomla</authorUrl>
 	<version>1.0.9</version>
 	<description>PLG_AUTH_MAILBOX_XML_DESCRIPTION</description>
+	<scriptfile>mailbox.script.php</scriptfile>
 	<files>
 		<filename plugin="mailbox">mailbox.php</filename>
 		<folder>language</folder>
