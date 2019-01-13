@@ -149,7 +149,7 @@ class PlgAuthenticationMailbox extends JPlugin
 		}
 
 		$username = $credentials['username'];
-		$atpos = strpos($username, '@');
+		$atpos = strrpos($username, '@');
 
 		if ($atpos === false)
 		{
