@@ -258,6 +258,23 @@ class PlgAuthenticationMailbox extends JPlugin
 			$response->status = JAuthentication::STATUS_FAILURE;
 			$imapErrors = imap_errors() ?: array();
 
+			/*
+			 * Error strings come from the uw-imap c-client library + server.
+			 * IMAP from src/c-client/imap4r1.c in imap_auth()
+			 * "Can not authenticate to IMAP server: "
+			 * POP from src/c-client/pop3.c in pop3_auth()
+			 * "Can not authenticate to POP3 server: "
+			 * NNTP from src/c-client/nntp.c in nntp_send_auth_work()
+			 * "Can not authenticate to NNTP server: "
+			 * NNTP can also set the server response as the error:
+			 * e.g. "481 Invalid username or password"
+			 * (Note: 481 not standardized and has other uses like conn limit)
+			 * NNTP also sets additional errors (e.g. "205 goodbye")
+			 *
+			 * Since there is no reliable way to tell whether the authentication
+			 * failure was due to bad username/password, treat them all the same.
+			 */
+
 			$errorMessage = JText::sprintf(
 				'PLG_AUTH_MAILBOX_ERRORCONNECTWITHMSG',
 				implode("\n", $imapErrors)
