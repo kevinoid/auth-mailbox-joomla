@@ -284,7 +284,7 @@ class PlgAuthenticationMailbox extends JPlugin
 			$errorMessageForLog = str_replace("\n", '; ', $errorMessage);
 			JLog::add(
 				$errorMessageForLog,
-				JLog::WARNING,
+				JLog::INFO,
 				'authentication_mailbox'
 			);
 
