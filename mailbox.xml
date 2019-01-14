@@ -67,6 +67,7 @@
 				<field
 					name="mail_server"
 					type="text"
+					required="true"
 					default="localhost"
 					label="PLG_AUTH_MAILBOX_SERVERLABEL"
 					description="PLG_AUTH_MAILBOX_SERVERDESC"
@@ -74,7 +75,8 @@
 				<field
 					name="mail_protocol"
 					type="list"
-					default="0"
+					required="true"
+					default="imap"
 					label="PLG_AUTH_MAILBOX_PROTOLABEL"
 					description="PLG_AUTH_MAILBOX_PROTODESC"
 					>
