@@ -245,8 +245,12 @@ class PlgAuthenticationMailbox extends JPlugin
 
 		$mailboxStream = @imap_open(
 			$mailboxStr,
-			$mailboxUsername, $credentials['password'],
-			$mailboxOpts, 1
+			$mailboxUsername,
+			$credentials['password'],
+			$mailboxOpts,
+			// Note: NNTP doesn't even try to authenticate if $n_retries == 0
+			// No retries observed with $n_retries == 1.  Always a good choice.
+			1
 		);
 
 		if (!$mailboxStream)
