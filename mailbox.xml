@@ -58,6 +58,26 @@
 								default="0"
 								/>
 							<field
+								name="mail_server"
+								type="text"
+								required="true"
+								default="localhost"
+								label="PLG_AUTH_MAILBOX_SERVERLABEL"
+								description="PLG_AUTH_MAILBOX_SERVERDESC"
+								/>
+							<field
+								name="mail_protocol"
+								type="list"
+								required="true"
+								default="imap"
+								label="PLG_AUTH_MAILBOX_PROTOLABEL"
+								description="PLG_AUTH_MAILBOX_PROTODESC"
+								>
+								<option value="imap">IMAP</option>
+								<option value="nntp">NNTP</option>
+								<option value="pop3">POP3</option>
+							</field>
+							<field
 								name="mail_domain"
 								type="text"
 								default="example.com"
@@ -85,26 +105,6 @@
 								>
 								<option value="1">JYES</option>
 								<option value="0">JNO</option>
-							</field>
-							<field
-								name="mail_server"
-								type="text"
-								required="true"
-								default="localhost"
-								label="PLG_AUTH_MAILBOX_SERVERLABEL"
-								description="PLG_AUTH_MAILBOX_SERVERDESC"
-								/>
-							<field
-								name="mail_protocol"
-								type="list"
-								required="true"
-								default="imap"
-								label="PLG_AUTH_MAILBOX_PROTOLABEL"
-								description="PLG_AUTH_MAILBOX_PROTODESC"
-								>
-								<option value="imap">IMAP</option>
-								<option value="nntp">NNTP</option>
-								<option value="pop3">POP3</option>
 							</field>
 							<field
 								name="create_users"
