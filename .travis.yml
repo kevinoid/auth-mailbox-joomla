@@ -16,8 +16,6 @@ language: php
 #  - linux
 #  - osx
 
-sudo: false
-
 install:
   # Ignore composer.lock to test against current versions of dependencies.
   - rm -f composer.lock
