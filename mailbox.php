@@ -5,6 +5,7 @@
  * @package		Auth_Mailbox
  * @copyright	Copyright (C) 2010 - 2011 Digital Engine Software, LLC. All rights reserved.
  * @copyright	Copyright (C) 2013-2014, 2016, 2019 Kevin Locke <kevin@kevinlocke.name>. All rights reserved.
+ * @copyright	Copyright (C) 2018 Manuel Pérez Ayala <mayala@unex.es>. All rights reserved.
  * @license		GNU General Public License version 2 or later; see COPYING.txt
  * @since		1.0.0
  * Joomla! is free software. This version may have been modified pursuant
@@ -29,16 +30,18 @@ class PlgAuthenticationMailbox extends JPlugin
 	 * Get the mailbox connection string for use in imap_open determined from
 	 * the current param values.
 	 *
+	 * @param	object	$target		Target mail server
+	 *
 	 * @return	string	Mailbox connection string for use in imap_open
 	 *
 	 * @access	private
 	 */
-	protected function getMailboxString()
+	protected function getMailboxString($target)
 	{
 		$mailboxParts = array('{');
-		$mailboxParts[] = $this->params->get('mail_server');
+		$mailboxParts[] = $target->mail_server;
 
-		$port = $this->params->get('mail_port');
+		$port = $target->mail_port;
 
 		if ($port)
 		{
@@ -46,7 +49,7 @@ class PlgAuthenticationMailbox extends JPlugin
 			$mailboxParts[] = $port;
 		}
 
-		$protocol = $this->params->get('mail_protocol');
+		$protocol = $target->mail_protocol;
 		$mailboxParts[] = '/service=' . $protocol;
 
 		// Note:  /readonly only supported for IMAP, errors with SMTP & POP3
@@ -55,7 +58,7 @@ class PlgAuthenticationMailbox extends JPlugin
 			$mailboxParts[] = '/readonly';
 		}
 
-		switch ($this->params->get('mail_encryption'))
+		switch ($target->mail_encryption)
 		{
 			case 0:
 				$mailboxParts[] = '/notls';
@@ -71,12 +74,12 @@ class PlgAuthenticationMailbox extends JPlugin
 				break;
 		}
 
-		if (!$this->params->get('mail_allow_plaintext'))
+		if (!$target->mail_allow_plaintext)
 		{
 			$mailboxParts[] = '/secure';
 		}
 
-		if ($this->params->get('mail_validate_cert'))
+		if ($target->mail_validate_cert)
 		{
 			$mailboxParts[] = '/validate-cert';
 		}
@@ -167,170 +170,187 @@ class PlgAuthenticationMailbox extends JPlugin
 
 		if ($atpos === false)
 		{
-			$mailDomain = $this->params->get('mail_domain');
-
-			if ($mailDomain)
-			{
-				$email = $username . '@' . $mailDomain;
-			}
+			$userDomain = false;
+			$userDomainLower = false;
 		}
 		else
 		{
-			$email = $username;
 			$username = substr($username, 0, $atpos);
+			$userDomain = substr($username, $atpos + 1);
+			$userDomainLower = strtolower($userDomain);
 		}
 
-		$joomlaUsername
-			= isset($email) && $this->params->get('mail_domain_in_joomla_username') ?
-				$email :
-				$username;
-		$mailboxUsername
-			= isset($email) && $this->params->get('mail_domain_username') ?
-				$email :
-				$username;
-
-		// Check that the user exists, if required
-		if (!$this->params->get('create_users')
-			&& !JUserHelper::getUserId($joomlaUsername))
+		foreach ($this->params->get('targets') as $target)
 		{
-			$response->status = JAuthentication::STATUS_FAILURE;
-			$response->error_message = JText::sprintf(
-				'JGLOBAL_AUTH_FAILED',
-				JText::_('JGLOBAL_AUTH_NO_USER')
-			);
-
-			return;
-		}
-
-		// Build mailbox options for imap_open
-		$mailboxStr = $this->getMailboxString();
-		$mailboxOpts = 0;
-		$protocol = $this->params->get('mail_protocol');
-
-		// Note:  OP_READONLY only supported for IMAP, errors with SMTP & POP3
-		if ($protocol === 'imap')
-		{
-			$mailboxOpts |= OP_READONLY;
-		}
-
-		if (!$this->params->get('mail_allow_plaintext'))
-		{
-			$mailboxOpts |= OP_SECURE;
-		}
-
-		// Note:  OP_HALFOPEN only supported for IMAP and NNTP
-		switch ($protocol)
-		{
-			case 'imap':
-			case 'nntp':
-				$mailboxOpts |= OP_HALFOPEN;
-				break;
-			default:
-				break;
-		}
-
-		// Clear error stack
-		imap_errors();
-
-		JLog::add(
-			JText::sprintf(
-				'PLG_AUTH_MAILBOX_LOGIMAPOPEN',
-				$mailboxStr,
-				$mailboxUsername,
-				$mailboxOpts
-			),
-			JLog::DEBUG,
-			'authentication_mailbox'
-		);
-
-		$mailboxStream = @imap_open(
-			$mailboxStr,
-			$mailboxUsername,
-			$credentials['password'],
-			$mailboxOpts,
-			// Note: NNTP doesn't even try to authenticate if $n_retries == 0
-			// No retries observed with $n_retries == 1.  Always a good choice.
-			1
-		);
-
-		if (!$mailboxStream)
-		{
-			$response->status = JAuthentication::STATUS_FAILURE;
-			$imapErrors = imap_errors() ?: array();
-
-			/*
-			 * Error strings come from the uw-imap c-client library + server.
-			 * IMAP from src/c-client/imap4r1.c in imap_auth()
-			 * "Can not authenticate to IMAP server: "
-			 * POP from src/c-client/pop3.c in pop3_auth()
-			 * "Can not authenticate to POP3 server: "
-			 * NNTP from src/c-client/nntp.c in nntp_send_auth_work()
-			 * "Can not authenticate to NNTP server: "
-			 * NNTP can also set the server response as the error:
-			 * e.g. "481 Invalid username or password"
-			 * (Note: 481 not standardized and has other uses like conn limit)
-			 * NNTP also sets additional errors (e.g. "205 goodbye")
-			 *
-			 * Since there is no reliable way to tell whether the authentication
-			 * failure was due to bad username/password, treat them all the same.
-			 */
-
-			$errorMessage = JText::sprintf(
-				'PLG_AUTH_MAILBOX_ERRORCONNECTWITHMSG',
-				implode("\n", $imapErrors)
-			);
-
-			// Multi-line log messages can be problematic in log files.  Use ;
-			$errorMessageForLog = str_replace("\n", '; ', $errorMessage);
-			JLog::add(
-				$errorMessageForLog,
-				JLog::INFO,
-				'authentication_mailbox'
-			);
-
-			if ($this->params->get('show_imap_errors'))
+			if (!$userDomainLower)
 			{
-				$response->error_message = $errorMessageForLog;
-
-				/*
-				 * Display error to user user as requested by configuration.
-				 * Note:  Authentication->authenticate only returns
-				 * AuthenticationResponse for the last plugin and
-				 * CMSApplication->login only displays it when
-				 * $options['silent'] is falsey.  Better to see 2 copies than
-				 * none.
-				 */
-				JFactory::getApplication()->enqueueMessage(
-					str_replace("\n", '<br />', htmlspecialchars($errorMessage)),
-					'warning'
-				);
+				// Domain not in username.  Use default for target, if set.
+				$mailDomain = $target->mail_domain;
+				$email = $mailDomain ? $username . '@' . $mailDomain : false;
+			}
+			elseif (strtolower($target->mail_domain) === $userDomainLower)
+			{
+				// Domain in username matches target.  Use it.
+				$email = $username;
 			}
 			else
 			{
-				$response->error_message
-					= JText::_('PLG_AUTH_MAILBOX_ERRORCONNECT');
+				// Domain in username doesn't match target.  Skip target.
+				continue;
+			}
+
+			$joomlaUsername
+				= $email && $target->mail_domain_in_joomla_username ?
+					$email :
+					$username;
+			$mailboxUsername
+				= $email && $target->mail_domain_username ?
+					$email :
+					$username;
+
+			// Check that the user exists, if required
+			if (!$target->create_users
+				&& !JUserHelper::getUserId($joomlaUsername))
+			{
+				$response->status = JAuthentication::STATUS_FAILURE;
+				$response->error_message = JText::sprintf(
+					'JGLOBAL_AUTH_FAILED',
+					JText::_('JGLOBAL_AUTH_NO_USER')
+				);
+
+				continue;
+			}
+
+			// Build mailbox options for imap_open
+			$mailboxStr = $this->getMailboxString($target);
+			$mailboxOpts = 0;
+			$protocol = $target->mail_protocol;
+
+			// Note:  OP_READONLY only supported for IMAP, errors with SMTP & POP3
+			if ($protocol === 'imap')
+			{
+				$mailboxOpts |= OP_READONLY;
+			}
+
+			if (!$target->mail_allow_plaintext)
+			{
+				$mailboxOpts |= OP_SECURE;
+			}
+
+			// Note:  OP_HALFOPEN only supported for IMAP and NNTP
+			switch ($protocol)
+			{
+				case 'imap':
+				case 'nntp':
+					$mailboxOpts |= OP_HALFOPEN;
+					break;
+				default:
+					break;
+			}
+
+			// Clear error stack
+			imap_errors();
+
+			JLog::add(
+				JText::sprintf(
+					'PLG_AUTH_MAILBOX_LOGIMAPOPEN',
+					$mailboxStr,
+					$mailboxUsername,
+					$mailboxOpts
+				),
+				JLog::DEBUG,
+				'authentication_mailbox'
+			);
+
+			$mailboxStream = @imap_open(
+				$mailboxStr,
+				$mailboxUsername,
+				$credentials['password'],
+				$mailboxOpts,
+				// Note: NNTP doesn't even try to authenticate if $n_retries == 0
+				// No retries observed with $n_retries == 1.  Always a good choice.
+				1
+			);
+
+			if (!$mailboxStream)
+			{
+				$imapErrors = imap_errors() ?: array();
+
+				/*
+				 * Error strings come from the uw-imap c-client library + server.
+				 * IMAP from src/c-client/imap4r1.c in imap_auth()
+				 * "Can not authenticate to IMAP server: "
+				 * POP from src/c-client/pop3.c in pop3_auth()
+				 * "Can not authenticate to POP3 server: "
+				 * NNTP from src/c-client/nntp.c in nntp_send_auth_work()
+				 * "Can not authenticate to NNTP server: "
+				 * NNTP can also set the server response as the error:
+				 * e.g. "481 Invalid username or password"
+				 * (Note: 481 not standardized and has other uses like conn limit)
+				 * NNTP also sets additional errors (e.g. "205 goodbye")
+				 *
+				 * Since there is no reliable way to tell whether the authentication
+				 * failure was due to bad username/password, treat them all the same.
+				 */
+
+				$errorMessage = JText::sprintf(
+					'PLG_AUTH_MAILBOX_ERRORCONNECTWITHMSG',
+					implode("\n", $imapErrors)
+				);
+
+				// Multi-line log messages can be problematic in log files.  Use ;
+				$errorMessageForLog = str_replace("\n", '; ', $errorMessage);
+				JLog::add(
+					$errorMessageForLog,
+					JLog::INFO,
+					'authentication_mailbox'
+				);
+
+				if ($this->params->get('show_imap_errors'))
+				{
+					/*
+					 * Display error to user user as requested by configuration.
+					 * Note:  Authentication->authenticate only returns
+					 * AuthenticationResponse for the last plugin and
+					 * CMSApplication->login only displays it when
+					 * $options['silent'] is falsey.  Better to see 2 copies than
+					 * none.
+					 */
+					JFactory::getApplication()->enqueueMessage(
+						str_replace("\n", '<br />', htmlspecialchars($errorMessage)),
+						'warning'
+					);
+				}
+
+				continue;
+			}
+
+			// Mailbox connection was successful, user authenticated
+			imap_close($mailboxStream);
+
+			JLog::add(
+				JText::sprintf('PLG_AUTH_MAILBOX_LOGAUTHENTICATED', $joomlaUsername),
+				JLog::DEBUG,
+				'authentication_mailbox'
+			);
+
+			$response->status = JAuthentication::STATUS_SUCCESS;
+			$response->error_message = '';
+			$response->fullname = $joomlaUsername;
+			$response->username = $joomlaUsername;
+
+			if ($email)
+			{
+				$response->email = $email;
 			}
 
 			return;
 		}
 
-		// Mailbox connection was successful, user authenticated
-		imap_close($mailboxStream);
-
-		JLog::add(
-			JText::sprintf('PLG_AUTH_MAILBOX_LOGAUTHENTICATED', $joomlaUsername),
-			JLog::DEBUG,
-			'authentication_mailbox'
+		$response->status = JAuthentication::STATUS_FAILURE;
+		$response->error_message = JText::sprintf(
+			'JGLOBAL_AUTH_FAILED',
+			JText::_('PLG_AUTH_MAILBOX_ERRORCONNECT')
 		);
-
-		$response->status = JAuthentication::STATUS_SUCCESS;
-		$response->error_message = '';
-		$response->fullname = $joomlaUsername;
-		$response->username = $joomlaUsername;
-
-		if (isset($email))
-		{
-			$response->email = $email;
-		}
 	}
 }

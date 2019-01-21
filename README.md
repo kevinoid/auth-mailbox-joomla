@@ -1,10 +1,10 @@
 Mailbox Authentication Plugin for Joomla!
 =========================================
 
-This is a Joomla! plugin to authenticate users against a mail server via IMAP,
-NNTP, or POP3.  It forwards authentication credentials provided by the user to
-a mail server, then relays the authentication decision of the mail server back
-to Joomla!.
+This is a Joomla! plugin to authenticate users against one or more mail
+servers via IMAP, NNTP, or POP3.  It forwards authentication credentials
+provided by the user to one or more mail servers, then relays the
+authentication decision of the mail servers back to Joomla!.
 
 In simpler terms, it lets users log in to Joomla! with the same username and
 password that they use for email, without the need to copy and synchronize the
@@ -19,6 +19,7 @@ accounts manually.
  * Optionally require secure (non-plaintext) authentication.
  * Support for TLS (optional or required) and SSL.
  * Optional validation of SSL certificate from mail server.
+ * Authentication against multiple mail servers.
  * Supports the [Joomla! Update
    System](https://docs.joomla.org/Help36:Extensions_Extension_Manager_Update).
 
@@ -28,9 +29,6 @@ accounts manually.
  * Does not integrate email/webmail into Joomla! or provide Single Sign-On
    (SSO) between email/webmail and Joomla!  Meaning users will still need to
    login to both Joomla! and email/webmail separately.
- * Authentication against multiple mail servers.  Currently this plugin only
-   supports authentication against a single mail server (although the address
-   to which it connects may be load-balanced to multiple servers transparently).
 
 
 ### Plugin Requirements
