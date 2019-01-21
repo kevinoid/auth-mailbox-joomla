@@ -1,3 +1,11 @@
+2019-01-21  Kevin Locke <kevin@kevinlocke.name>
+
+	* *.*: Release 1.0.11
+	* mailbox.xml: Add es-ES to <languages>
+	* mailbox.php: Reject email addresses with empty parts
+	* mailbox.xml: Make mail_server and protocol required in configuration
+	* mailbox.php: Reduce severity of failed auth logging
+
 2019-01-13  Kevin Locke <kevin@kevinlocke.name>
 
 	* *.*: Release 1.0.10
