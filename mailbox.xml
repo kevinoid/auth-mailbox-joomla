@@ -31,6 +31,8 @@
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_authentication_mailbox.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.plg_authentication_mailbox.sys.ini</language>
+		<language tag="es-ES">language/es-ES/es-ES.plg_authentication_mailbox.ini</language>
+		<language tag="es-ES">language/es-ES/es-ES.plg_authentication_mailbox.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
