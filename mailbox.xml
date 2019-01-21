@@ -10,7 +10,7 @@
 	<license>GNU General Public License version 2 or later; see COPYING.txt</license>
 	<authorEmail>kevin@kevinlocke.name</authorEmail>
 	<authorUrl>https://github.com/kevinoid/auth-mailbox-joomla</authorUrl>
-	<version>1.0.10</version>
+	<version>1.0.11</version>
 	<description>PLG_AUTH_MAILBOX_XML_DESCRIPTION</description>
 	<scriptfile>mailbox.script.php</scriptfile>
 	<files>
