@@ -40,7 +40,7 @@ accounts manually.
   2.5](https://github.com/kevinoid/auth-mailbox-joomla/releases/tag/v1.0.9-for-joomla2.5)
   and [for Joomla!
   1.5](https://github.com/kevinoid/auth-mailbox-joomla/releases/tag/v1.0.9-for-joomla1.5).
-* **[PHP IMAP Extension](https://secure.php.net/manual/en/book.imap.php).**
+* **[PHP IMAP Extension](https://www.php.net/manual/en/book.imap.php).**
 
 
 ### Troubleshooting
@@ -50,14 +50,14 @@ If mailbox authentication is not working, try the following steps:
 1. Enable [Log Almost
    Everything](https://docs.joomla.org/images/8/88/Debug_logging_settings-en.jpg)
    from the "Logging" tab of the "System - Debug" plugin in the [Extensions
-   Plugin Manager](https://docs.joomla.org/Help36:Extensions_Plugin_Manager)?
+   Plugin Manager](https://docs.joomla.org/Help310:Extensions_Plugin_Manager)?
 2. Attempt to log in.
 3. Open `administrator/logs/everything.php` from the Joomla! directory on your
    server in a text editor and search for `authentication_mailbox` near the end
    of the log file.  The log messages should include the arguments to
-   [`imap_open`](https://secure.php.net/manual/en/function.imap-open.php)
+   [`imap_open`](https://www.php.net/manual/en/function.imap-open.php)
    (excluding passwords) and the resulting messages from
-   [`imap_errors`](https://secure.php.net/manual/en/function.imap-errors.php).
+   [`imap_errors`](https://www.php.net/manual/en/function.imap-errors.php).
    - If `administrator/logs/everything.php` does not exist, check that the
      directory permissions allow the PHP process to write to that directory.
    - If `authentication_mailbox` does not appear in
