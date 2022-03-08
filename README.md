@@ -45,7 +45,9 @@ accounts manually.
 
 ### Troubleshooting
 
-If mailbox authentication is not working, try the following steps:
+#### Joomla! Logs
+
+To get debugging information from the Joomla! logs:
 
 1. Enable [Log Almost
    Everything](https://docs.joomla.org/images/8/88/Debug_logging_settings-en.jpg)
@@ -63,6 +65,54 @@ If mailbox authentication is not working, try the following steps:
    - If `authentication_mailbox` does not appear in
      `administrator/logs/everything.php`, check that "Authentication -
      Mailbox" is enabled in the Extensions Plugin Manager.
+
+#### imap_open
+
+If [`imap_open`](https://www.php.net/manual/en/function.imap-open.php) can not
+open the user's mailbox, it may be simpler to debug by calling
+[`imap_open`](https://www.php.net/manual/en/function.imap-open.php) from a
+test script such as the following:
+
+```php
+<?php
+header('Content-Type: text/plain');
+
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 1);
+
+$mailbox = imap_open(
+	'{imap.example.com/service=imap/tls/validate-cert}',
+	'myusername',
+	'mypassword',
+	0,
+	1);
+print 'imap_open: ' . ($mailbox ? "Succeeded.\n" : "Failed.\n");
+
+print 'imap_errors: ';
+var_dump(imap_errors());
+
+if ($mailbox) {
+	imap_close($mailbox);
+}
+```
+
+1. Save the above code into a file (e.g. `test.php`).
+2. Adjust the
+   [`imap_open`](https://www.php.net/manual/en/function.imap-open.php)
+   parameters as necessary:
+   1. Replace `imap.example.com` with a valid server (and replace
+      `/service=imap` with `/sevice=pop3` or `/service=nntp` as necessary).
+   2. Replace `myusername` and `mypassword` with the username and password with
+      a valid user and adjust any other parameters as desired.
+   3. Add or remove flags such as `OP_SECURE` from the flags parameter.
+3. Upload the file to a web server.
+4. Visit the URL for the uploaded file in a web browser.
+5. Repeat steps 2-4 until the page contains:
+
+       imap_open: Succeeded.
+       imap_errors: bool(false)
+
+6. Adjust the plugin configuration to match the functional parameters.
 
 Installation instructions are available in [INSTALL.md](INSTALL.md).
 Major changes are listed in [ChangeLog.txt](ChangeLog.txt).
